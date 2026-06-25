@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hemifacial Spasm MVD Anesthesia Teaching Course</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #5d6b78;
+      --line: #d7e0e5;
+      --bg: #f6f4ee;
+      --panel: #fffdf8;
+      --blue: #294f63;
+      --teal: #2d8178;
+      --sage: #718c66;
+      --coral: #b96658;
+      --soft: #edf5f3;
+      --shadow: 0 16px 36px rgba(25, 39, 52, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.62;
+    }
+
+    a { color: var(--teal); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 22px;
+      border-bottom: 1px solid rgba(215, 224, 229, 0.86);
+      background: rgba(255, 253, 248, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .brand strong {
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button,
+    .nav-button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 7px 12px;
+      background: #ffffff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    button[aria-pressed="true"] {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #ffffff;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(330px, 1.08fr);
+      gap: 34px;
+      align-items: center;
+      padding: 54px 6vw 42px;
+      background:
+        linear-gradient(180deg, rgba(255,253,248,0.74), rgba(246,244,238,1)),
+        radial-gradient(circle at 78% 18%, rgba(45,129,120,0.14), transparent 36%),
+        radial-gradient(circle at 12% 86%, rgba(185,102,88,0.12), transparent 34%);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--coral);
+      font-weight: 750;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 900px;
+      font-size: clamp(34px, 5vw, 70px);
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 22px);
+    }
+
+    .hero-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .hero-note {
+      padding: 14px 18px 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .course-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 790px;
+      margin-top: 26px;
+    }
+
+    .metric {
+      border-top: 3px solid var(--teal);
+      padding-top: 12px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 32px;
+      align-items: start;
+      padding: 30px 6vw 70px;
+    }
+
+    nav {
+      position: sticky;
+      top: 76px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.88);
+    }
+
+    nav a {
+      display: block;
+      padding: 8px 0;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(215, 224, 229, 0.68);
+    }
+
+    nav a:last-child { border-bottom: 0; }
+
+    main {
+      display: grid;
+      gap: 24px;
+    }
+
+    section {
+      scroll-margin-top: 96px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 26px;
+      background: var(--panel);
+      box-shadow: 0 10px 24px rgba(25, 39, 52, 0.06);
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: clamp(24px, 3vw, 40px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 20px 0 8px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    p { margin: 0 0 12px; }
+
+    .section-kicker {
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-weight: 750;
+      font-size: 13px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .figure {
+      margin: 16px 0 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .figure img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .caption {
+      padding: 10px 14px;
+      border-top: 1px solid var(--line);
+      background: #fffdf8;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .callout {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--coral);
+      border-radius: 0 8px 8px 0;
+      background: #fff7f3;
+      color: #57342f;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #ffffff;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .check-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .check-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--blue);
+    }
+
+    .lang-en [data-zh],
+    .lang-zh [data-en] {
+      display: none !important;
+    }
+
+    footer {
+      padding: 24px 6vw 44px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 36px;
+      }
+
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; }
+      .grid-2,
+      .checklist,
+      .course-meta { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .topbar,
+      nav { display: none; }
+      body { background: #ffffff; }
+      .hero {
+        min-height: auto;
+        display: block;
+        padding: 24px 0;
+      }
+      .layout {
+        display: block;
+        padding: 0;
+      }
+      section,
+      .hero-card {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body class="lang-zh">
+  <header class="topbar">
+    <div class="brand">
+      <strong>HFS MVD Neuroanesthesia Teaching</strong>
+      <span data-zh>面向康奈尔大学大一见习学生的中英双语课件</span>
+      <span data-en>Bilingual course for a first-year Cornell student observer</span>
+    </div>
+    <div class="controls" aria-label="Language and print controls">
+      <button type="button" id="zhBtn" aria-pressed="true">中文</button>
+      <button type="button" id="enBtn" aria-pressed="false">English</button>
+      <a class="nav-button" href="index-standalone.html">
+        <span data-zh>独立版</span>
+        <span data-en>Standalone</span>
+      </a>
+      <button type="button" onclick="window.print()">
+        <span data-zh>打印 / PDF</span>
+        <span data-en>Print / PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero" id="overview">
+    <div>
+      <p class="eyebrow">Neuroanesthesia Observation</p>
+      <h1>
+        <span data-zh>面肌痉挛微血管减压术全麻见习课</span>
+        <span data-en>General Anesthesia Observation for Hemifacial Spasm MVD</span>
+      </h1>
+      <p class="lead">
+        <span data-zh>用明天的病例讲清楚一条主线：面神经为什么会抽动，手术怎样解除血管压迫，麻醉医生怎样在全麻、气道安全、神经监测和苏醒质量之间保持平衡。</span>
+        <span data-en>Use tomorrow's case to understand one clinical line: why the facial nerve twitches, how MVD relieves vascular compression, and how anesthesia balances airway safety, monitoring signals, and smooth emergence.</span>
+      </p>
+      <div class="course-meta">
+        <div class="metric">
+          <strong>HFS</strong>
+          <span data-zh>面肌痉挛</span>
+          <span data-en>hemifacial spasm</span>
+        </div>
+        <div class="metric">
+          <strong>MVD</strong>
+          <span data-zh>微血管减压术</span>
+          <span data-en>microvascular decompression</span>
+        </div>
+        <div class="metric">
+          <strong>10</strong>
+          <span data-zh>英文标识教学图</span>
+          <span data-en>English-labeled figures</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <img src="assets/hfs-mvd-illustrations/01-roadmap.png" alt="Hemifacial spasm MVD anesthesia roadmap">
+      <div class="hero-note">
+        <span data-zh>总览图把诊断、手术、全麻、神经监测和苏醒观察放在同一条路线里。</span>
+        <span data-en>The roadmap connects diagnosis, surgery, general anesthesia, neurophysiological monitoring, and recovery checks.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <nav aria-label="Course sections">
+      <a href="#case"><span data-zh>1. 今日病例</span><span data-en>1. Case</span></a>
+      <a href="#disease"><span data-zh>2. 疾病机制</span><span data-en>2. Mechanism</span></a>
+      <a href="#surgery"><span data-zh>3. 手术目标</span><span data-en>3. Surgical Goal</span></a>
+      <a href="#ga"><span data-zh>4. 为什么全麻</span><span data-en>4. Why GA</span></a>
+      <a href="#monitoring"><span data-zh>5. 神经监测</span><span data-en>5. Monitoring</span></a>
+      <a href="#balance"><span data-zh>6. 麻醉平衡</span><span data-en>6. Balance</span></a>
+      <a href="#priorities"><span data-zh>7. 术中关注</span><span data-en>7. Priorities</span></a>
+      <a href="#observer"><span data-zh>8. 观察清单</span><span data-en>8. Checklist</span></a>
+      <a href="#debrief"><span data-zh>9. 术后复盘</span><span data-en>9. Debrief</span></a>
+    </nav>
+
+    <main>
+      <section id="case">
+        <p class="section-kicker">Case Map</p>
+        <h2><span data-zh>今日病例：从“脸抽动”看到“颅神经保护”</span><span data-en>Today's Case: From Facial Twitching to Cranial Nerve Protection</span></h2>
+        <div class="grid-2">
+          <div>
+            <h3><span data-zh>学生今天要看懂什么</span><span data-en>What the student should understand</span></h3>
+            <p data-zh>这台手术不是简单地“把血管拿开”。对麻醉见习来说，更重要的是理解：患者为什么需要稳定全麻，为什么神经监测会影响麻醉用药，为什么苏醒时要特别平稳。</p>
+            <p data-en>This case is not just moving a vessel away. For anesthesia observation, the key is understanding why stable general anesthesia is needed, why monitoring affects anesthetic choices, and why emergence must be smooth.</p>
+            <div class="pill-row">
+              <span class="pill">Hemifacial Spasm</span>
+              <span class="pill">Microvascular Decompression</span>
+              <span class="pill">General Anesthesia with ETT</span>
+              <span class="pill">Facial EMG</span>
+              <span class="pill">BAEP / ABR</span>
+            </div>
+          </div>
+          <figure class="figure">
+            <img src="assets/hfs-mvd-illustrations/11-debrief-questions.png" alt="Debrief questions after MVD">
+            <figcaption class="caption">
+              <span data-zh>这张图适合术后复盘：用五个问题把“看见”变成“理解”。</span>
+              <span data-en>This figure supports the post-case debrief: five questions turn observation into reasoning.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="disease">
+        <p class="section-kicker">Disease Mechanism</p>
+        <h2><span data-zh>面肌痉挛：面神经被“持续敲门”</span><span data-en>Hemifacial Spasm: The Facial Nerve Is Being Irritated</span></h2>
+        <p data-zh>面肌痉挛通常表现为一侧面部不自主抽动。一个常见机制是面神经在脑干附近受到血管压迫或刺激，异常放电传到面部肌肉，形成反复抽动。</p>
+        <p data-en>Hemifacial spasm often presents as involuntary contractions on one side of the face. A common mechanism is vascular compression or irritation of the facial nerve near the brainstem, leading to abnormal firing and facial muscle twitching.</p>
+        <figure class="figure">
+          <img src="assets/hfs-mvd-illustrations/02-hfs-mechanism.png" alt="Hemifacial spasm neurovascular compression mechanism">
+          <figcaption class="caption">
+            <span data-zh>讲解顺序：血管接触面神经 → 神经受刺激 → 异常放电 → 面部肌肉抽动。</span>
+            <span data-en>Teaching sequence: vessel contacts facial nerve -> nerve irritation -> abnormal firing -> facial muscle contractions.</span>
+          </figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="assets/hfs-mvd-illustrations/09-vessel-nerve-bridge.png" alt="Hand-drawn vessel nerve separation">
+          <figcaption class="caption">
+            <span data-zh>手绘图把“血管压迫神经”和“垫片隔开”讲得更生活化，适合给初学者打底。</span>
+            <span data-en>The hand-drawn figure makes vessel-nerve compression and separation easier for a beginner to grasp.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="surgery">
+        <p class="section-kicker">Surgical Goal</p>
+        <h2><span data-zh>MVD 做什么：解除压迫，而不是切断神经</span><span data-en>What MVD Does: Relieve Compression, Not Cut the Nerve</span></h2>
+        <div class="grid-2">
+          <div>
+            <p data-zh>微血管减压术的核心是找到压迫面神经的责任血管，将血管从神经上移开，并用软垫把两者隔开。对学生来说，最重要的一句话是：手术目标是解除“血管-神经冲突”，同时保护面神经和听神经等邻近结构。</p>
+            <p data-en>The core of MVD is identifying the offending vessel, moving it away from the facial nerve, and placing a soft pad between vessel and nerve. The key teaching line is: relieve the vessel-nerve conflict while protecting the facial nerve and nearby structures such as CN VIII.</p>
+            <div class="callout">
+              <span data-zh>不要把 MVD 讲成“切掉抽动的神经”。它更像是把反复碰撞的两件东西轻轻分开。</span>
+              <span data-en>Do not describe MVD as cutting the twitching nerve. It is more like gently separating two structures that keep colliding.</span>
+            </div>
+          </div>
+          <figure class="figure">
+            <img src="assets/hfs-mvd-illustrations/03-mvd-anatomy.png" alt="MVD surgical anatomy and goal">
+            <figcaption class="caption">
+              <span data-zh>图中把后颅窝、脑干、面神经、听神经附近关系和垫片目标放在一起。</span>
+              <span data-en>The figure connects posterior fossa anatomy, brainstem, facial nerve, nearby CN VIII, and the decompression pad.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="ga">
+        <p class="section-kicker">Why General Anesthesia</p>
+        <h2><span data-zh>为什么需要全身麻醉气管插管</span><span data-en>Why General Anesthesia with Endotracheal Intubation</span></h2>
+        <p data-zh>这类后颅窝显微手术需要患者完全静止、头部固定、气道可靠、通气稳定，并且要为神经监测创造条件。全麻气管插管让麻醉医生能控制氧合、通气和二氧化碳，同时维持合适麻醉深度。</p>
+        <p data-en>Posterior fossa microsurgery requires immobility, head fixation, a secure airway, stable ventilation, and conditions suitable for nerve monitoring. General anesthesia with an endotracheal tube allows control of oxygenation, ventilation, carbon dioxide, and anesthetic depth.</p>
+        <figure class="figure">
+          <img src="assets/hfs-mvd-illustrations/04-ga-workflow.png" alt="General anesthesia workflow for MVD">
+          <figcaption class="caption">
+            <span data-zh>这张图适合术前讲全流程：诱导、插管、头部固定、维持、神经监测配合、平稳苏醒。</span>
+            <span data-en>This timeline introduces induction, intubation, head fixation, maintenance, monitoring-compatible anesthesia, and smooth emergence.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="monitoring">
+        <p class="section-kicker">Neurophysiological Monitoring</p>
+        <h2><span data-zh>神经监测：手术团队的“早期报警系统”</span><span data-en>Neurophysiological Monitoring: The Team's Early Warning System</span></h2>
+        <p data-zh>在 MVD 中，术中神经电生理监测帮助团队观察面神经和听觉通路相关信号。对初学者不必讲太深，只要知道：面肌肌电 `Facial EMG` 反映面神经相关肌肉活动；`BAEP/ABR` 用于观察听觉通路；信号质量会受麻醉、肌松、体温、灌注和团队沟通影响。</p>
+        <p data-en>During MVD, intraoperative neurophysiological monitoring helps the team observe facial nerve and auditory pathway signals. For a beginner: Facial EMG reflects facial nerve-related muscle activity; BAEP/ABR observes auditory pathway function; signal quality can be affected by anesthesia, neuromuscular blockade, temperature, perfusion, and team communication.</p>
+        <figure class="figure">
+          <img src="assets/hfs-mvd-illustrations/05-neuro-monitoring.png" alt="Intraoperative neurophysiological monitoring during MVD">
+          <figcaption class="caption">
+            <span data-zh>让学生听懂三个词就够：Facial EMG、BAEP/ABR、signal quality。</span>
+            <span data-en>For the student, three terms are enough to start: Facial EMG, BAEP/ABR, and signal quality.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="balance">
+        <p class="section-kicker">Anesthesia-Monitoring Balance</p>
+        <h2><span data-zh>麻醉难点：既要安全插管，也要保留监测信号</span><span data-en>The Anesthesia Challenge: Secure the Airway, Preserve Useful Signals</span></h2>
+        <div class="grid-2">
+          <div>
+            <p data-zh>插管时常需要肌松，但面神经肌电监测需要肌肉反应可以被观察到。持续过深肌松可能让 EMG 信号不可靠。因此，这台手术很适合给学生讲“麻醉不是固定配方，而是和手术阶段、监测团队持续协调”。</p>
+            <p data-en>Intubation often needs neuromuscular relaxation, but facial EMG monitoring requires detectable muscle responses. Continuous deep paralysis can reduce signal reliability. This case is ideal for teaching that anesthesia is not a fixed recipe; it is coordinated with surgical stages and the monitoring team.</p>
+          </div>
+          <figure class="figure">
+            <img src="assets/hfs-mvd-illustrations/06-nmb-monitoring-balance.png" alt="Neuromuscular blockade and facial nerve monitoring balance">
+            <figcaption class="caption">
+              <span data-zh>这是本课件最关键图之一：安全气道与信号可靠性之间要动态平衡。</span>
+              <span data-en>This is one of the key figures: airway safety and signal reliability must be balanced dynamically.</span>
+            </figcaption>
+          </figure>
+        </div>
+        <figure class="figure">
+          <img src="assets/hfs-mvd-illustrations/10-anesthesia-signal-balance.png" alt="Hand-drawn anesthesia and signal balance">
+          <figcaption class="caption">
+            <span data-zh>手绘图用于把复杂监测问题讲成一个“调音台”：睡眠、气道、通气、循环、神经信号都要协调。</span>
+            <span data-en>The hand-drawn figure turns monitoring-friendly anesthesia into a mixing board: sleep, airway, ventilation, circulation, and nerve signals must be coordinated.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="priorities">
+        <p class="section-kicker">Intraoperative Priorities</p>
+        <h2><span data-zh>术中麻醉关注点：显微手术里的稳定工程</span><span data-en>Intraoperative Priorities: Stability During Microsurgery</span></h2>
+        <p data-zh>术中重点包括气道和通气、血流动力学、体位和压力点、眼保护、体温、液体、疼痛和恶心呕吐预防、神经监测沟通。学生可以把麻醉医生理解为“同时看多个系统反馈的人”。</p>
+        <p data-en>Intraoperative priorities include airway and ventilation, hemodynamics, positioning and pressure points, eye protection, temperature, fluids, pain and PONV prevention, and communication around monitoring. The student can view the anesthesiologist as the person integrating multiple system feedback loops.</p>
+        <figure class="figure">
+          <img src="assets/hfs-mvd-illustrations/07-anesthesia-priorities.png" alt="MVD intraoperative anesthesia priorities">
+          <figcaption class="caption">
+            <span data-zh>这张矩阵适合作为术中观察清单的视觉版。</span>
+            <span data-en>This matrix works as the visual version of an intraoperative observation checklist.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="observer">
+        <p class="section-kicker">Observer Mode</p>
+        <h2><span data-zh>学生现场观察清单</span><span data-en>Student Observation Checklist</span></h2>
+        <div class="checklist">
+          <div class="check-item">
+            <strong>Before induction</strong>
+            <span data-zh>看身份核查、气道评估、静脉通路、基础生命体征、症状侧别和神经功能基线。</span>
+            <span data-en>Observe identity check, airway assessment, IV access, baseline vitals, symptom side, and neurologic baseline.</span>
+          </div>
+          <div class="check-item">
+            <strong>Induction and airway</strong>
+            <span data-zh>看预氧合、诱导、面罩通气、插管、EtCO2 确认、导管固定和眼保护。</span>
+            <span data-en>Watch preoxygenation, induction, mask ventilation, intubation, EtCO2 confirmation, tube fixation, and eye protection.</span>
+          </div>
+          <div class="check-item">
+            <strong>Positioning</strong>
+            <span data-zh>看头部固定、体位摆放、压力点保护、线路和导管是否安全。</span>
+            <span data-en>Watch head fixation, positioning, pressure point protection, and safe lines and tubes.</span>
+          </div>
+          <div class="check-item">
+            <strong>Monitoring</strong>
+            <span data-zh>听懂 Facial EMG、BAEP/ABR、信号质量和麻醉团队沟通。</span>
+            <span data-en>Listen for Facial EMG, BAEP/ABR, signal quality, and anesthesia-team communication.</span>
+          </div>
+          <div class="check-item">
+            <strong>Maintenance</strong>
+            <span data-zh>观察血压、心率、EtCO2、氧合、体温、液体和手术刺激的关系。</span>
+            <span data-en>Connect blood pressure, heart rate, EtCO2, oxygenation, temperature, fluids, and surgical stimulation.</span>
+          </div>
+          <div class="check-item">
+            <strong>Emergence</strong>
+            <span data-zh>看平稳苏醒、呼吸恢复、拔管准备、疼痛恶心处理和 PACU 交接。</span>
+            <span data-en>Watch smooth emergence, return of breathing, extubation readiness, pain/PONV management, and PACU handoff.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="debrief">
+        <p class="section-kicker">Debrief</p>
+        <h2><span data-zh>术后五问：把一次见习变成麻醉思维</span><span data-en>Five Post-Case Questions: Turn Observation into Anesthesia Reasoning</span></h2>
+        <p data-zh>每台手术后用 2 分钟回答五个问题：为什么会面肌痉挛？MVD 解除的是什么冲突？为什么需要全麻插管？神经监测需要麻醉配合什么？苏醒后最先观察什么？</p>
+        <p data-en>After the case, answer five questions in two minutes: Why does HFS happen? What conflict does MVD relieve? Why is GA with ETT useful? What does monitoring need from anesthesia? What should be checked first after emergence?</p>
+        <div class="callout">
+          <span data-zh>给学生的核心句：Anesthesia is not only putting the patient to sleep. It is protecting the brain, nerves, airway, and recovery.</span>
+          <span data-en>Core teaching line: Anesthesia is not only putting the patient to sleep. It is protecting the brain, nerves, airway, and recovery.</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p data-zh>教学提示：本课件用于见习教学，不替代本院规范、麻醉记录、患者个体化评估、术者要求或麻醉医师临床判断；不提供固定剂量方案。</p>
+    <p data-en>Teaching note: This course supports observation teaching. It does not replace local protocols, anesthesia records, individualized assessment, surgeon requirements, or anesthesiologist judgment. It does not provide fixed dosing.</p>
+    <p data-zh>跨电脑使用：如果只想带走一个文件，请使用 <a href="index-standalone.html">独立版 HTML</a>，其中 10 张图片已内嵌。</p>
+    <p data-en>Cross-computer use: if you want to carry only one file, use the <a href="index-standalone.html">standalone HTML</a>; all 10 images are embedded.</p>
+    <p>
+      Sources consulted:
+      <a href="https://mayfieldclinic.com/pe-mvd.htm">Mayfield Brain & Spine MVD overview</a>,
+      <a href="https://my.clevelandclinic.org/health/diseases/hemifacial-spasm">Cleveland Clinic HFS</a>,
+      <a href="https://neurosurgery.weillcornell.org/condition/hemifacial-spasm/surgery-hemifacial-spasm">Weill Cornell HFS surgery</a>.
+    </p>
+  </footer>
+
+  <script>
+    const body = document.body;
+    const zhBtn = document.getElementById("zhBtn");
+    const enBtn = document.getElementById("enBtn");
+
+    function setLanguage(lang) {
+      const isZh = lang === "zh";
+      body.classList.toggle("lang-zh", isZh);
+      body.classList.toggle("lang-en", !isZh);
+      zhBtn.setAttribute("aria-pressed", String(isZh));
+      enBtn.setAttribute("aria-pressed", String(!isZh));
+      document.documentElement.lang = isZh ? "zh-CN" : "en";
+    }
+
+    zhBtn.addEventListener("click", () => setLanguage("zh"));
+    enBtn.addEventListener("click", () => setLanguage("en"));
+  </script>
+</body>
+</html>
