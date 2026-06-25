@@ -137,6 +137,40 @@
       color: var(--muted);
     }
 
+    .course-preview {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .preview-item {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #ffffff;
+    }
+
+    .preview-item.large {
+      grid-column: 1 / -1;
+    }
+
+    .preview-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #ffffff;
+    }
+
+    .preview-item span {
+      display: block;
+      padding: 8px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
     .stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -282,6 +316,33 @@
       font-size: 14px;
     }
 
+    .module-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0 0 22px;
+    }
+
+    .summary-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 16px;
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--blue);
+      font-size: 15px;
+    }
+
+    .summary-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
     .disclaimer {
       border-left: 4px solid var(--coral);
       border-radius: 0 8px 8px 0;
@@ -300,7 +361,8 @@
     @media (max-width: 980px) {
       .hero,
       .cards,
-      .note-grid {
+      .note-grid,
+      .module-summary {
         grid-template-columns: 1fr;
       }
       .hero { min-height: auto; }
@@ -352,6 +414,20 @@
         <p>
           The work combines clinical teaching goals with AI-assisted writing and illustration. It is not meant to be a final authority. It is a living set of teaching materials that can improve with feedback.
         </p>
+        <div class="course-preview" aria-label="Teaching courseware preview">
+          <figure class="preview-item large">
+            <img src="gyne-anesthesia-course/assets/gyne-anesthesia-illustrations/04-ga-ett-timeline.png" alt="General anesthesia and endotracheal intubation timeline from the gynecologic surgery module">
+            <span>Gynecologic surgery: general anesthesia and airway workflow</span>
+          </figure>
+          <figure class="preview-item">
+            <img src="hfs-mvd-anesthesia-course/assets/hfs-mvd-illustrations/05-neuro-monitoring.png" alt="Neurophysiological monitoring illustration from the HFS MVD anesthesia module">
+            <span>HFS / MVD: neuro-monitoring and smooth emergence</span>
+          </figure>
+          <figure class="preview-item">
+            <img src="obstetric-cesarean-anesthesia-course/assets/obstetric-cesarean-illustrations/09-obstetric-hemorrhage-response.png" alt="Obstetric hemorrhage response illustration from the cesarean anesthesia module">
+            <span>Obstetric anesthesia: high-risk preparation and hemorrhage response</span>
+          </figure>
+        </div>
       </aside>
     </section>
 
@@ -360,6 +436,20 @@
       <p class="section-intro">
         Each module opens directly in the browser. The standalone versions embed all images, so they are suitable for GitHub Pages hosting and simple sharing.
       </p>
+      <div class="module-summary" aria-label="What the teaching courseware includes">
+        <div class="summary-item">
+          <strong>1. Operating-room observation roadmaps</strong>
+          <p>Beginner-facing guides that show what the learner should notice before induction, during surgery, and at emergence.</p>
+        </div>
+        <div class="summary-item">
+          <strong>2. Scenario-specific anesthesia reasoning</strong>
+          <p>Three teaching sets explain gynecologic surgery, HFS / MVD neuroanesthesia, and cesarean / high-risk obstetric anesthesia.</p>
+        </div>
+        <div class="summary-item">
+          <strong>3. Bilingual visual teaching assets</strong>
+          <p>Each course combines Chinese-English explanations, medical infographics, hand-drawn concept figures, and debrief prompts.</p>
+        </div>
+      </div>
       <div class="cards">
         <article class="card">
           <img src="gyne-anesthesia-course/assets/figure-contact-sheet.png" alt="Gynecologic surgery anesthesia figure overview">

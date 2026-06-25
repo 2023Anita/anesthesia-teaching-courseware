@@ -1,5 +1,11 @@
 # Anesthesia Teaching Courseware
 
+Repository name: `anesthesia-teaching-courseware`
+
+Live site: <https://2023anita.github.io/anesthesia-teaching-courseware/>
+
+![Anesthesia teaching courseware preview](gyne-anesthesia-course/assets/figure-contact-sheet.png)
+
 This repository collects bilingual HTML teaching modules for introductory anesthesia observation.
 
 The project started from a practical teaching need: I was preparing to mentor a first-year Cornell University student who is interested in anesthesiology but does not yet have an accessible, visual, beginner-friendly set of learning materials. Many anesthesia resources are either written for clinicians who already know the operating room, or they are too text-heavy for a first exposure. These modules try to sit in the middle: clinically grounded, visual, concise, and usable before, during, or after an operating-room observation day.
@@ -20,6 +26,15 @@ The materials are created with a clinician-in-the-loop workflow. I provide the c
 | Gynecologic Surgery Anesthesia | Total laparoscopic hysterectomy, TVT-O, general anesthesia with endotracheal intubation | [Open course](gyne-anesthesia-course/index-standalone.html) |
 | Hemifacial Spasm MVD Anesthesia | Microvascular decompression, general anesthesia, nerve monitoring, smooth emergence | [Open course](hfs-mvd-anesthesia-course/index-standalone.html) |
 | Cesarean Delivery and High-Risk Obstetric Anesthesia | Cesarean anesthesia, placenta previa / PAS, gestational hypertension, gestational diabetes, advanced maternal age | [Open course](obstetric-cesarean-anesthesia-course/index-standalone.html) |
+
+## What Is Included
+
+The homepage is designed as a courseware portfolio, not a generic project landing page. It shows:
+
+- a visual cover area with selected figures from the three teaching sets;
+- course cards that open the standalone HTML modules;
+- a short explanation of the clinician-led, AI-assisted workflow;
+- boundaries that make clear these pages are teaching aids, not clinical protocols.
 
 ## How to Use
 
