@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Japanese Handdrawn Illustrations 教学课件</title>
+  <meta name="description" content="面向学生的 japanese-handdrawn-illustrations Codex Skill 双语教学课件。">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #24211f;
+      --muted: #665f58;
+      --paper: #fffaf1;
+      --surface: #fffdf8;
+      --line: #e5dccc;
+      --blue: #dbeaf0;
+      --green: #dce9d7;
+      --pink: #f3dddc;
+      --orange: #f3dfbd;
+      --shadow: 0 18px 55px rgba(41, 35, 26, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(219, 234, 240, 0.42), rgba(255, 250, 241, 0) 360px),
+        var(--paper);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .en,
+    html[data-lang="en"] .zh {
+      display: none;
+    }
+
+    html[data-lang="en"] .en {
+      display: inline;
+    }
+
+    html[data-lang="en"] .block.en {
+      display: block;
+    }
+
+    .block.zh {
+      display: block;
+    }
+
+    html[data-lang="en"] .block.zh {
+      display: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 250, 241, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      min-width: 210px;
+    }
+
+    .brand strong {
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav a,
+    .lang-switch button {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink);
+      padding: 6px 11px;
+      font: inherit;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      gap: 6px;
+    }
+
+    .lang-switch button[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--surface);
+      border-color: var(--ink);
+    }
+
+    .hero {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(330px, 0.86fr);
+      gap: 42px;
+      align-items: center;
+      padding: 58px 0 32px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-bottom: 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--muted);
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.12;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      max-width: 820px;
+      font-size: 64px;
+    }
+
+    h2 {
+      font-size: 36px;
+    }
+
+    h3 {
+      font-size: 21px;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      padding: 9px 16px;
+      text-decoration: none;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .button.primary {
+      background: var(--ink);
+      color: var(--surface);
+    }
+
+    .button.secondary {
+      background: var(--surface);
+    }
+
+    .hero-visual {
+      margin: 0;
+    }
+
+    .hero-visual img,
+    .media img {
+      width: 100%;
+      aspect-ratio: 1672 / 941;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-visual figcaption,
+    .media figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .section {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(260px, 0.42fr);
+      gap: 26px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .grid-3,
+    .grid-4,
+    .gallery {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card,
+    .step,
+    .code-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .card,
+    .step {
+      padding: 18px;
+    }
+
+    .card p,
+    .step p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 30px;
+      height: 30px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: var(--blue);
+      font-weight: 800;
+    }
+
+    .tag.green {
+      background: var(--green);
+    }
+
+    .tag.pink {
+      background: var(--pink);
+    }
+
+    .tag.orange {
+      background: var(--orange);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(330px, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--surface);
+      font-weight: 800;
+    }
+
+    .code-panel {
+      overflow: hidden;
+    }
+
+    .code-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(219, 234, 240, 0.48);
+      font-weight: 800;
+    }
+
+    pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 14px;
+      line-height: 1.55;
+      background: #24211f;
+      color: #fffdf8;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+
+    .callout {
+      margin-top: 18px;
+      border-left: 5px solid #8eb6c1;
+      background: rgba(219, 234, 240, 0.45);
+      padding: 16px 18px;
+      border-radius: 8px;
+      color: var(--ink);
+    }
+
+    .path-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .path-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+
+    .path-list code {
+      color: #315d69;
+      white-space: nowrap;
+    }
+
+    .footer {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 54px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .topbar-inner,
+      .hero,
+      .section-head,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        display: grid;
+        align-items: start;
+        padding: 10px 0;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+
+      h1 {
+        font-size: 44px;
+      }
+
+      h2 {
+        font-size: 30px;
+      }
+
+      .grid-3,
+      .grid-4,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+
+      pre code {
+        white-space: inherit;
+        overflow-wrap: inherit;
+      }
+    }
+
+    @media (max-width: 520px) {
+      h1 {
+        font-size: 36px;
+      }
+
+      .lead {
+        font-size: 17px;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      .path-list div {
+        display: grid;
+      }
+
+      .path-list code {
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <strong>Japanese Handdrawn Illustrations</strong>
+        <span>
+          <span class="zh">面向学生的双语教学课件</span>
+          <span class="en">Bilingual teaching courseware for students</span>
+        </span>
+      </div>
+      <nav class="nav" aria-label="Course navigation">
+        <a href="#what"><span class="zh">先懂它</span><span class="en">Understand</span></a>
+        <a href="#use"><span class="zh">怎么用</span><span class="en">Use</span></a>
+        <a href="#build"><span class="zh">做自己的</span><span class="en">Build Yours</span></a>
+        <span class="lang-switch" aria-label="Language switcher">
+          <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+          <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+        </span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div>
+        <div class="eyebrow">
+          <span class="zh">Codex Skill 教学 · 图文并茂 · 可反复中英切换</span>
+          <span class="en">Codex Skill Lesson · Visual · Switch languages anytime</span>
+        </div>
+        <h1>
+          <span class="zh">把一个开源 Skill 变成你自己的创作工具</span>
+          <span class="en">Turn an Open-Source Skill into Your Own Creative Tool</span>
+        </h1>
+        <p class="lead">
+          <span class="zh">这节课用 `japanese-handdrawn-illustrations` 做例子，教你如何调用一个 Codex Skill，也教你如何 fork、改角色、改风格，建立自己的配图系统。</span>
+          <span class="en">This lesson uses `japanese-handdrawn-illustrations` as the example: first to show how to use a Codex Skill, then to show how to fork it, change the character and style, and build your own illustration system.</span>
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#use">
+            <span class="zh">开始学习</span>
+            <span class="en">Start the Lesson</span>
+          </a>
+          <a class="button secondary" href="https://github.com/2023Anita/japanese-handdrawn-illustrations" target="_blank" rel="noreferrer">
+            <span class="zh">打开 GitHub 项目</span>
+            <span class="en">Open GitHub Repo</span>
+          </a>
+        </div>
+      </div>
+      <figure class="hero-visual">
+        <img src="assets/demo/01-skill-workroom.png" alt="Japanese handdrawn illustration skill workroom">
+        <figcaption>
+          <span class="zh">图 1：这个项目把风格、角色、构图和检查规则放进一个可复用工作间。</span>
+          <span class="en">Figure 1: The project packages style, character, composition, and QA rules into a reusable workroom.</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="what">
+      <div class="section-head">
+        <div>
+          <h2><span class="zh">第一层：先用一句话讲明白</span><span class="en">Layer 1: Explain It in One Sentence</span></h2>
+          <p class="section-note">
+            <span class="zh">它不是“一个好看的提示词”，而是一套让图片风格稳定、可复用、可检查的工作流。</span>
+            <span class="en">It is not just a pretty prompt. It is a workflow that makes image style consistent, reusable, and checkable.</span>
+          </p>
+        </div>
+        <div class="pill-row">
+          <span class="pill">Codex Skill</span>
+          <span class="pill">Visual System</span>
+          <span class="pill">QA Checklist</span>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="tag">1</span>
+          <h3><span class="zh">它解决什么问题？</span><span class="en">What problem does it solve?</span></h3>
+          <p><span class="zh">普通 AI 配图常常“一次好看，下一次跑偏”。这个项目把经验拆成稳定规则，让同一类文章能持续生成同一种气质的图。</span><span class="en">Ordinary AI image prompts often work once and drift later. This project turns experience into stable rules so related articles can keep the same visual mood.</span></p>
+        </article>
+        <article class="card">
+          <span class="tag green">2</span>
+          <h3><span class="zh">它为什么适合中文内容？</span><span class="en">Why is it good for Chinese content?</span></h3>
+          <p><span class="zh">它默认支持中文短标注，强调“认知锚点”，适合中文文章、教学材料、Obsidian 笔记和医学科普。</span><span class="en">It supports short Chinese labels and focuses on cognitive anchors, making it useful for Chinese articles, teaching materials, Obsidian notes, and medical explainers.</span></p>
+        </article>
+        <article class="card">
+          <span class="tag pink">3</span>
+          <h3><span class="zh">它为什么像工程项目？</span><span class="en">Why is it engineering-like?</span></h3>
+          <p><span class="zh">它有目录结构、职责拆分、模板和验收清单。你改一个模块，就能调整一类输出，而不是每次重写一大段 prompt。</span><span class="en">It has structure, separated responsibilities, templates, and acceptance checks. Changing one module adjusts a whole class of outputs instead of rewriting a giant prompt every time.</span></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <div>
+          <h2><span class="zh">第二层：看懂项目结构</span><span class="en">Layer 2: Read the Project Structure</span></h2>
+          <p class="section-note">
+            <span class="zh">学生可以把它理解成一个“小型创作团队”：每个文件只负责一件事。</span>
+            <span class="en">Students can understand it as a small creative team: each file has one clear job.</span>
+          </p>
+          <div class="path-list">
+            <div><code>SKILL.md</code><span><span class="zh">总导演：规定何时触发、工作流和交付方式</span><span class="en">Director: when to trigger, workflow, and delivery</span></span></div>
+            <div><code>style-dna.md</code><span><span class="zh">美术指导：背景、线条、颜色、留白和禁忌</span><span class="en">Art direction: background, lines, colors, white space, and rules</span></span></div>
+            <div><code>character-ip.md</code><span><span class="zh">角色设定：固定“小旅人”的外形和动作职责</span><span class="en">Character design: keeps the traveler consistent and active</span></span></div>
+            <div><code>composition-patterns.md</code><span><span class="zh">分镜师：提供桌面、车站、雨伞、手账地图等隐喻</span><span class="en">Storyboard: offers desk, station, umbrella, and notebook-map metaphors</span></span></div>
+            <div><code>prompt-template.md</code><span><span class="zh">执行模板：把想法变成单张图片提示词</span><span class="en">Execution template: turns ideas into one-image prompts</span></span></div>
+            <div><code>qa-checklist.md</code><span><span class="zh">质检员：判断图是否跑偏，指导迭代</span><span class="en">QA checker: detects drift and guides iteration</span></span></div>
+          </div>
+        </div>
+        <figure class="media">
+          <img src="assets/demo/03-prompt-system-cards.png" alt="Prompt system cards">
+          <figcaption>
+            <span class="zh">图 2：把提示词拆成模块，学生更容易理解，也更容易修改。</span>
+            <span class="en">Figure 2: Modular prompt cards make the system easier to understand and change.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="use">
+      <div class="section-head">
+        <div>
+          <h2><span class="zh">第三层：如何使用这个 Skill</span><span class="en">Layer 3: How to Use This Skill</span></h2>
+          <p class="section-note">
+            <span class="zh">核心方法很简单：安装 skill、给文章、让 Codex 先找认知锚点，再生成或先给 shot list。</span>
+            <span class="en">The core method is simple: install the skill, provide an article, let Codex find cognitive anchors, then generate images or draft a shot list first.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="steps">
+          <article class="step">
+            <span class="step-number">1</span>
+            <div>
+              <h3><span class="zh">安装到 Codex skills 目录</span><span class="en">Install it into the Codex skills folder</span></h3>
+              <p><span class="zh">把仓库里的 skill 文件夹复制到本机 `~/.codex/skills/`，然后开启新的 Codex 会话。</span><span class="en">Copy the skill folder into `~/.codex/skills/`, then start a new Codex session.</span></p>
+            </div>
+          </article>
+          <article class="step">
+            <span class="step-number">2</span>
+            <div>
+              <h3><span class="zh">明确任务：先分析还是直接出图</span><span class="en">Choose the task: analyze first or generate now</span></h3>
+              <p><span class="zh">如果还不确定怎么配图，先要 shot list；如果目标明确，就直接要求生成 3-5 张。</span><span class="en">If the illustration plan is unclear, ask for a shot list first. If the goal is clear, request 3-5 images directly.</span></p>
+            </div>
+          </article>
+          <article class="step">
+            <span class="step-number">3</span>
+            <div>
+              <h3><span class="zh">检查输出是否符合 QA</span><span class="en">Check the output with QA</span></h3>
+              <p><span class="zh">重点看：是否 16:9、是否留白、是否有小旅人参与核心动作、是否避免日漫/PPT/商业海报感。</span><span class="en">Check whether it is 16:9, airy, character-driven, and free from anime, PPT, or commercial-poster drift.</span></p>
+            </div>
+          </article>
+        </div>
+
+        <div class="code-panel">
+          <div class="code-title">
+            <span><span class="zh">可直接使用的命令</span><span class="en">Commands You Can Use</span></span>
+          </div>
+          <pre class="block zh"><code>cp -R "skills/japanese-handdrawn-illustrations" "$HOME/.codex/skills/"
+
+Use $japanese-handdrawn-illustrations to design and generate 4 Japanese hand-drawn illustrations for this Chinese article.
+Focus on the core cognitive anchors, not one image per paragraph.</code></pre>
+          <pre class="block en"><code>cp -R "skills/japanese-handdrawn-illustrations" "$HOME/.codex/skills/"
+
+Use $japanese-handdrawn-illustrations to design and generate 4 Japanese hand-drawn illustrations for this Chinese article.
+Focus on the core cognitive anchors, not one image per paragraph.</code></pre>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong><span class="zh">给学生的理解方式：</span><span class="en">Student-friendly explanation:</span></strong>
+        <span class="zh">不要把它当“画图按钮”。更准确地说，它先帮你读文章、找重点、想隐喻，再把这些规则交给图像生成模型。</span>
+        <span class="en">Do not treat it as a simple image button. More accurately, it reads the article, finds the important ideas, chooses metaphors, and then passes structured rules to the image model.</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <figure class="media">
+          <img src="assets/demo/02-content-to-image-workflow.png" alt="Content to image workflow">
+          <figcaption>
+            <span class="zh">图 3：从正文到图像，关键不是“平均每段配一张”，而是找值得画出来的认知锚点。</span>
+            <span class="en">Figure 3: From text to image, the key is not one image per paragraph, but finding the cognitive anchors worth drawing.</span>
+          </figcaption>
+        </figure>
+        <div>
+          <h2><span class="zh">第四层：真正的工作流</span><span class="en">Layer 4: The Real Workflow</span></h2>
+          <div class="grid-3">
+            <article class="card">
+              <span class="tag">A</span>
+              <h3><span class="zh">读内容</span><span class="en">Read</span></h3>
+              <p><span class="zh">先理解文章要解决什么问题，不急着画。</span><span class="en">Understand the problem before drawing.</span></p>
+            </article>
+            <article class="card">
+              <span class="tag green">B</span>
+              <h3><span class="zh">找锚点</span><span class="en">Anchor</span></h3>
+              <p><span class="zh">选择“前后变化、分类整理、路径选择、风险保护”等值得视觉化的位置。</span><span class="en">Select moments like state changes, classification, path choices, or risk protection.</span></p>
+            </article>
+            <article class="card">
+              <span class="tag pink">C</span>
+              <h3><span class="zh">出图并质检</span><span class="en">Generate and QA</span></h3>
+              <p><span class="zh">一张图只讲一个核心结构，生成后按 QA 清单修正。</span><span class="en">Each image explains one core structure, then gets checked and refined.</span></p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2><span class="zh">第五层：用项目图片反推设计思路</span><span class="en">Layer 5: Learn Design Thinking from the Demo Images</span></h2>
+          <p class="section-note">
+            <span class="zh">这些图片不是装饰，而是把抽象规则变得可见。学生可以按“图像表达了哪个模块”来学习。</span>
+            <span class="en">These images are not decoration. They make abstract rules visible. Students can learn by asking which module each image represents.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <article class="card">
+          <figure class="media">
+            <img src="assets/demo/01-skill-workroom.png" alt="Skill workroom">
+          </figure>
+          <h3><span class="zh">Skill 工作间</span><span class="en">Skill Workroom</span></h3>
+          <p><span class="zh">说明一个好 skill 要有工具架：风格、角色、构图、模板和 QA 都要有位置。</span><span class="en">Shows that a good skill needs shelves: style, character, composition, templates, and QA all have their places.</span></p>
+        </article>
+        <article class="card">
+          <figure class="media">
+            <img src="assets/demo/02-content-to-image-workflow.png" alt="Workflow">
+          </figure>
+          <h3><span class="zh">正文到图片</span><span class="en">Content to Image</span></h3>
+          <p><span class="zh">说明出图前要先理解内容，不是随机把文字变成插画。</span><span class="en">Shows that image generation starts with understanding, not random decoration.</span></p>
+        </article>
+        <article class="card">
+          <figure class="media">
+            <img src="assets/demo/03-prompt-system-cards.png" alt="Prompt cards">
+          </figure>
+          <h3><span class="zh">Prompt 模块卡</span><span class="en">Prompt Cards</span></h3>
+          <p><span class="zh">说明 prompt 可以拆成小模块，模块越清楚，修改越容易。</span><span class="en">Shows that prompts can be modular. Clear modules make editing easier.</span></p>
+        </article>
+        <article class="card">
+          <figure class="media">
+            <img src="assets/demo/04-qa-umbrella.png" alt="QA umbrella">
+          </figure>
+          <h3><span class="zh">QA 雨伞</span><span class="en">QA Umbrella</span></h3>
+          <p><span class="zh">说明质量检查像一把伞：挡住跑偏、太满、太像 PPT、太像日漫等问题。</span><span class="en">Shows QA as an umbrella that blocks drift, clutter, PPT-like layouts, and anime-like style.</span></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="build">
+      <div class="section-head">
+        <div>
+          <h2><span class="zh">第六层：用这个 GitHub 项目建立自己的东西</span><span class="en">Layer 6: Build Your Own Thing from This GitHub Project</span></h2>
+          <p class="section-note">
+            <span class="zh">最推荐学生做的不是“照抄”，而是 fork 后替换其中几个稳定模块。</span>
+            <span class="en">The best student project is not copying. Fork it and replace a few stable modules.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-4">
+        <article class="card">
+          <span class="tag">1</span>
+          <h3><span class="zh">Fork 仓库</span><span class="en">Fork the repo</span></h3>
+          <p><span class="zh">保留原有目录结构，这样 Codex 仍然知道如何读取 skill。</span><span class="en">Keep the folder structure so Codex still knows how to read the skill.</span></p>
+        </article>
+        <article class="card">
+          <span class="tag green">2</span>
+          <h3><span class="zh">换角色</span><span class="en">Change the character</span></h3>
+          <p><span class="zh">把“小旅人”改成你的固定角色，例如“小医生”“小研究员”“小编辑”。</span><span class="en">Replace the traveler with your own recurring character, such as a young doctor, researcher, or editor.</span></p>
+        </article>
+        <article class="card">
+          <span class="tag pink">3</span>
+          <h3><span class="zh">改风格 DNA</span><span class="en">Rewrite style DNA</span></h3>
+          <p><span class="zh">改背景、线条、颜色、禁忌和适用场景，但不要一次改太多。</span><span class="en">Adjust background, line style, colors, constraints, and use cases, but keep each change small.</span></p>
+        </article>
+        <article class="card">
+          <span class="tag orange">4</span>
+          <h3><span class="zh">做验收清单</span><span class="en">Create QA rules</span></h3>
+          <p><span class="zh">明确什么叫合格，什么叫跑偏。没有 QA 的生成系统很快会失控。</span><span class="en">Define what counts as good and what counts as drift. Without QA, generation systems lose control quickly.</span></p>
+        </article>
+      </div>
+
+      <div class="code-panel" style="margin-top: 18px;">
+        <div class="code-title">
+          <span><span class="zh">学生作业模板：建立自己的 skill</span><span class="en">Student Assignment Template: Build Your Own Skill</span></span>
+        </div>
+        <pre class="block zh"><code>1. Fork 这个仓库。
+2. 把 skills/japanese-handdrawn-illustrations 改名为你的主题。
+3. 修改 SKILL.md：写清楚你的 skill 适合什么任务。
+4. 修改 references/character-ip.md：定义固定角色。
+5. 修改 references/style-dna.md：定义风格边界和禁忌。
+6. 修改 references/composition-patterns.md：写 5-8 个适合你主题的构图隐喻。
+7. 修改 references/qa-checklist.md：写出合格标准和失败信号。
+8. 用 1 篇真实文章测试，保存示例图和 README 说明。</code></pre>
+        <pre class="block en"><code>1. Fork this repository.
+2. Rename skills/japanese-handdrawn-illustrations to your own theme.
+3. Edit SKILL.md: explain what task your skill is for.
+4. Edit references/character-ip.md: define a recurring character.
+5. Edit references/style-dna.md: define style boundaries and constraints.
+6. Edit references/composition-patterns.md: write 5-8 composition metaphors for your topic.
+7. Edit references/qa-checklist.md: define success criteria and failure signals.
+8. Test with one real article, then save demo images and update the README.</code></pre>
+      </div>
+
+      <div class="callout">
+        <strong><span class="zh">工程原则落地：</span><span class="en">Engineering principles in practice:</span></strong>
+        <span class="zh">KISS：先改少量文件；YAGNI：不要提前做复杂平台；DRY：共用模板和 QA；SOLID：每个文件只承担一个职责。</span>
+        <span class="en">KISS: change only a few files first. YAGNI: do not build a complex platform early. DRY: reuse templates and QA. SOLID: keep each file responsible for one job.</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <div>
+          <h2><span class="zh">最后记住这张图</span><span class="en">Remember This Image</span></h2>
+          <p class="section-note">
+            <span class="zh">一个好的生成式项目，不只是会生成结果，还要能保护结果不跑偏。这个项目的 QA 清单就是那把伞。</span>
+            <span class="en">A good generative project does more than produce outputs. It protects outputs from drifting. The QA checklist is that umbrella.</span>
+          </p>
+          <div class="pill-row">
+            <span class="pill"><span class="zh">少而清楚</span><span class="en">Sparse and clear</span></span>
+            <span class="pill"><span class="zh">角色一致</span><span class="en">Consistent character</span></span>
+            <span class="pill"><span class="zh">一图一意</span><span class="en">One image, one idea</span></span>
+            <span class="pill"><span class="zh">生成后质检</span><span class="en">QA after generation</span></span>
+          </div>
+        </div>
+        <figure class="media">
+          <img src="assets/demo/04-qa-umbrella.png" alt="QA umbrella illustration">
+          <figcaption>
+            <span class="zh">图 4：QA 不是最后补一句“好看一点”，而是一开始就写进系统里的边界。</span>
+            <span class="en">Figure 4: QA is not a final request to make it prettier. It is a boundary written into the system from the beginning.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      <span class="zh">本课件基于 GitHub 项目 `2023Anita/japanese-handdrawn-illustrations` 制作，图片来自该仓库 `assets/demo/`。语言按钮可重复切换，不依赖外部服务。</span>
+      <span class="en">This courseware is based on the GitHub project `2023Anita/japanese-handdrawn-illustrations`. Images come from `assets/demo/`. The language buttons can be used repeatedly and do not depend on external services.</span>
+    </p>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const buttons = Array.from(document.querySelectorAll("[data-set-lang]"));
+
+    function setLanguage(lang) {
+      root.dataset.lang = lang;
+      root.lang = lang === "zh" ? "zh-CN" : "en";
+      buttons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.setLang === lang));
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.setLang));
+    });
+  </script>
+</body>
+</html>

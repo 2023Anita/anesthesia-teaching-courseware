@@ -26,6 +26,7 @@ The materials are created with a clinician-in-the-loop workflow. I provide the c
 | Gynecologic Surgery Anesthesia | Total laparoscopic hysterectomy, TVT-O, general anesthesia with endotracheal intubation | [Open course](gyne-anesthesia-course/index-standalone.html) |
 | Hemifacial Spasm MVD Anesthesia | Microvascular decompression, general anesthesia, nerve monitoring, smooth emergence | [Open course](hfs-mvd-anesthesia-course/index-standalone.html) |
 | Cesarean Delivery and High-Risk Obstetric Anesthesia | Cesarean anesthesia, placenta previa / PAS, gestational hypertension, gestational diabetes, advanced maternal age | [Open course](obstetric-cesarean-anesthesia-course/index-standalone.html) |
+| Japanese Handdrawn Illustrations Skill Course | How to use a Codex illustration skill and fork the GitHub project into your own reusable visual system | [Open course](japanese-handdrawn-course/index.html) |
 
 ## What Is Included
 
