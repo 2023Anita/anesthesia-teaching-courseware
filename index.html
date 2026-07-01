@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Anesthesia Teaching Courseware</title>
+  <title>AI and Anesthesia Teaching Courseware</title>
   <style>
     :root {
       color-scheme: light;
@@ -13,6 +13,7 @@
       --bg: #f7f4ee;
       --panel: #fffdf8;
       --blue: #294f63;
+      --cornell: #b31b1b;
       --teal: #2d8178;
       --coral: #b96658;
       --sage: #738f68;
@@ -82,21 +83,42 @@
     }
 
     .hero {
-      min-height: 82vh;
+      min-height: 78vh;
       display: grid;
       grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
-      gap: 42px;
+      gap: 38px;
       align-items: center;
       padding: 58px 6vw 44px;
       background:
         linear-gradient(180deg, rgba(255,253,248,0.76), rgba(247,244,238,1)),
-        radial-gradient(circle at 78% 18%, rgba(45,129,120,0.14), transparent 36%),
-        radial-gradient(circle at 10% 84%, rgba(185,102,88,0.12), transparent 34%);
+        linear-gradient(90deg, rgba(179,27,27,0.06), transparent 42%),
+        radial-gradient(circle at 78% 18%, rgba(45,129,120,0.10), transparent 36%);
+    }
+
+    .affiliation {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .affiliation img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+
+    .affiliation span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
     }
 
     .eyebrow {
       margin: 0 0 12px;
-      color: var(--coral);
+      color: var(--cornell);
       font-weight: 750;
       font-size: 12px;
       text-transform: uppercase;
@@ -106,8 +128,8 @@
     h1 {
       margin: 0;
       max-width: 900px;
-      font-size: clamp(38px, 5vw, 76px);
-      line-height: 1.02;
+      font-size: clamp(36px, 4.8vw, 70px);
+      line-height: 1.04;
       letter-spacing: 0;
     }
 
@@ -135,6 +157,57 @@
     .hero-card p {
       margin: 0 0 14px;
       color: var(--muted);
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 180px;
+      gap: 18px;
+      align-items: center;
+      margin: 20px 0 0;
+      padding: 16px;
+      border: 1px solid rgba(216, 225, 230, 0.9);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .contact-panel strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--blue);
+      font-size: 15px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .contact-links a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .signature {
+      justify-self: end;
+      width: 168px;
+      max-width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: #fffdf8;
+    }
+
+    .signature img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: contrast(1.08);
     }
 
     .course-preview {
@@ -343,6 +416,10 @@
       font-size: 14px;
     }
 
+    .summary-item p + p {
+      margin-top: 10px;
+    }
+
     .disclaimer {
       border-left: 4px solid var(--coral);
       border-radius: 0 8px 8px 0;
@@ -367,18 +444,30 @@
       }
       .hero { min-height: auto; }
       .stats { grid-template-columns: 1fr; }
+      .contact-panel { grid-template-columns: 1fr; }
+      .signature { justify-self: start; }
+    }
+
+    @media (max-width: 560px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .nav { justify-content: flex-start; }
+      .course-preview { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
-      <strong>Anesthesia Teaching Courseware</strong>
-      <span>Visual bilingual modules for operating-room observation</span>
+      <strong>AI and Anesthesia Teaching Courseware</strong>
+      <span>For Cornell first-year students studying with Dr. Lixin Yin in China</span>
     </div>
     <nav class="nav" aria-label="Page navigation">
       <a href="#courses">Courses</a>
       <a href="#workflow">Workflow</a>
+      <a href="#instructor">Instructor</a>
       <a href="#purpose">Purpose</a>
     </nav>
   </header>
@@ -386,10 +475,14 @@
   <main>
     <section class="hero">
       <div>
-        <p class="eyebrow">Clinician-led · AI-assisted · Open learning</p>
-        <h1>Introductory anesthesia courseware for visual learning.</h1>
+        <div class="affiliation">
+          <img src="assets/site/cornell-university-seal.png" alt="Cornell University seal">
+          <span>Cornell University student learning track<br>China-based clinical and AI education</span>
+        </div>
+        <p class="eyebrow">Clinician-led · AI-assisted · China study experience</p>
+        <h1>AI and anesthesia courseware for first-year Cornell students.</h1>
         <p class="lead">
-          These bilingual HTML modules were created for an early medical learner: a first-year Cornell University student interested in anesthesiology. The goal is practical and modest: make the first look into the operating room less abstract, more visual, and easier to discuss.
+          These short bilingual modules are designed for Cornell University first-year students coming to China to learn with me at the intersection of clinical anesthesia, operating-room observation, and practical AI workflows.
         </p>
         <div class="stats" aria-label="Project stats">
           <div class="stat">
@@ -397,8 +490,8 @@
             <span>published teaching modules</span>
           </div>
           <div class="stat">
-            <strong>70+</strong>
-            <span>course figures and visual explainers</span>
+            <strong>AI + OR</strong>
+            <span>courseware, visual systems, and clinical observation</span>
           </div>
           <div class="stat">
             <strong>2</strong>
@@ -407,13 +500,25 @@
         </div>
       </div>
       <aside class="hero-card">
-        <h2>Why this exists</h2>
+        <h2>Program focus</h2>
         <p>
-          Many beginner resources in anesthesia assume the learner already understands the operating room. These modules start earlier. They use short explanations, clinical roadmaps, medical infographics, and gentle visual metaphors to help students ask better questions during observation.
+          Many beginner resources assume the learner already understands either the operating room or AI tooling. This site starts earlier. It gives students a clear first map: what to notice in anesthesia, how clinical reasoning is communicated, and how AI can help structure learning materials.
         </p>
         <p>
-          The work combines clinical teaching goals with AI-assisted writing and illustration. It is not meant to be a final authority. It is a living set of teaching materials that can improve with feedback.
+          The setting is intentionally personal and hands-on: a Cornell first-year learning experience in China, guided by clinical teaching, bilingual explanation, and compact AI-assisted courseware.
         </p>
+        <div class="contact-panel" id="instructor" aria-label="Instructor information">
+          <div>
+            <strong>Dr. Lixin Yin</strong>
+            <ul class="contact-links">
+              <li><a href="https://2023anita.github.io/" target="_blank" rel="noreferrer">Personal website</a></li>
+              <li><a href="mailto:ai@lixinyin.net">ai@lixinyin.net</a></li>
+            </ul>
+          </div>
+          <div class="signature" aria-label="Lixin Yin signature">
+            <img src="assets/site/lixin-signature.png" alt="Lixin Yin signature">
+          </div>
+        </div>
         <div class="course-preview" aria-label="Teaching courseware preview">
           <figure class="preview-item large">
             <img src="gyne-anesthesia-course/assets/gyne-anesthesia-illustrations/04-ga-ett-timeline.png" alt="General anesthesia and endotracheal intubation timeline from the gynecologic surgery module">
@@ -442,21 +547,20 @@
     <section class="section" id="courses">
       <h2>Course Modules</h2>
       <p class="section-intro">
-        Each module opens directly in the browser. The standalone versions embed all images, so they are suitable for GitHub Pages hosting and simple sharing.
+        The site includes anesthesia modules and AI visual-workflow modules. Each opens directly in the browser and is written for quick orientation rather than heavy reference reading.
       </p>
       <div class="module-summary" aria-label="What the teaching courseware includes">
         <div class="summary-item">
-          <strong>1. Operating-room observation roadmaps</strong>
-          <p>Beginner-facing guides that show what the learner should notice before induction, during surgery, and at emergence.</p>
+          <strong>1. Anesthesia observation roadmaps</strong>
+          <p>Beginner-facing guides for induction, monitoring, surgical context, emergence, and PACU handoff.</p>
         </div>
         <div class="summary-item">
-          <strong>2. Scenario-specific anesthesia reasoning</strong>
+          <strong>2. Scenario-specific clinical reasoning</strong>
           <p>Five clinical teaching sets explain gynecologic surgery, HFS / MVD neuroanesthesia, cesarean / high-risk obstetric anesthesia, hysteroscopic surgery, and pediatric ENT anesthesia.</p>
-          <p>Two workflow modules show how reusable Codex skills can become student-facing courseware and visual teaching systems.</p>
         </div>
         <div class="summary-item">
-          <strong>3. Bilingual visual teaching assets</strong>
-          <p>Each course combines Chinese-English explanations, medical infographics, hand-drawn concept figures, and debrief prompts.</p>
+          <strong>3. Practical AI learning systems</strong>
+          <p>Two workflow modules show how reusable Codex skills become courseware, illustration systems, and scientific visual assets.</p>
         </div>
       </div>
       <div class="cards">
@@ -605,7 +709,7 @@
     <section class="section" id="workflow">
       <h2>How the Materials Are Made</h2>
       <p class="section-intro">
-        The workflow is intentionally practical. Clinical context comes first; AI helps with structure, visuals, and packaging; final use still depends on human review.
+        The workflow is intentionally practical: clinical context first, AI as a production assistant, and human review before teaching use.
       </p>
       <div class="note-grid">
         <div class="note">
@@ -626,7 +730,7 @@
     <section class="section" id="purpose">
       <h2>Purpose and Boundaries</h2>
       <p class="section-intro">
-        This project is for learning, discussion, and visibility around practical anesthesia education. It is not a clinical protocol library.
+        This project supports a short, beginner-friendly learning experience for Cornell students visiting China. It is not a clinical protocol library.
       </p>
       <div class="disclaimer">
         These materials are introductory teaching aids. They do not provide patient-specific medical advice, drug dosing protocols, or clinical directives. They do not replace hospital policies, anesthesia records, attending physician judgment, or formal medical training.
@@ -635,7 +739,7 @@
   </main>
 
   <footer>
-    Created as a clinician-led, AI-assisted teaching project for early learners interested in anesthesiology. Feedback and learning-oriented contributions are welcome.
+    Created by Dr. Lixin Yin as a clinician-led, AI-assisted teaching project for Cornell first-year students exploring anesthesia and practical AI in China.
   </footer>
 </body>
 </html>
