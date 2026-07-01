@@ -27,6 +27,7 @@ The materials are created with a clinician-in-the-loop workflow. I provide the c
 | Hemifacial Spasm MVD Anesthesia | Microvascular decompression, general anesthesia, nerve monitoring, smooth emergence | [Open course](hfs-mvd-anesthesia-course/index-standalone.html) |
 | Cesarean Delivery and High-Risk Obstetric Anesthesia | Cesarean anesthesia, placenta previa / PAS, gestational hypertension, gestational diabetes, advanced maternal age | [Open course](obstetric-cesarean-anesthesia-course/index-standalone.html) |
 | Hysteroscopic Surgery Anesthesia | Uterine polyp / abnormal uterine bleeding, general anesthesia, distension fluid, fluid deficit, ambulatory recovery | [Open course](hysteroscopy-anesthesia-course/index-standalone.html) |
+| ENT Pediatric Anesthesia | Shared airway, pediatric airway differences, adenoid hypertrophy, tonsillar / laryngeal lesions, vocal cord polyp, smooth emergence | [Open course](ent-pediatric-anesthesia-course/index-standalone.html) |
 | Japanese Handdrawn Illustrations Skill Course | How to use a Codex illustration skill and fork the GitHub project into your own reusable visual system | [Open course](japanese-handdrawn-course/index.html) |
 | Scientific Visual Skills Course | How to use scientific visual skills for infographics, cover visuals, and publication-style mechanism figures, then fork the project into your own workflow | [Open course](scientific-visual-skills-course/index.html) |
 
