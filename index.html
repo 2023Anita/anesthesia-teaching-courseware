@@ -95,6 +95,15 @@
         radial-gradient(circle at 78% 18%, rgba(45,129,120,0.10), transparent 36%);
     }
 
+    .route-illustration {
+      display: block;
+      width: min(760px, 90%);
+      max-height: 330px;
+      object-fit: contain;
+      object-position: left center;
+      margin: 0 0 26px;
+    }
+
     .affiliation {
       display: flex;
       align-items: center;
@@ -446,6 +455,10 @@
       .stats { grid-template-columns: 1fr; }
       .contact-panel { grid-template-columns: 1fr; }
       .signature { justify-self: start; }
+      .route-illustration {
+        width: 100%;
+        max-height: none;
+      }
     }
 
     @media (max-width: 560px) {
@@ -475,6 +488,7 @@
   <main>
     <section class="hero">
       <div>
+        <img class="route-illustration" src="assets/site/cornell-jiangyin-study-route.png" alt="Hand-drawn route from Cornell to Jiangyin for studying AI and anesthesia in China">
         <div class="affiliation">
           <img src="assets/site/cornell-university-seal.png" alt="Cornell University seal">
           <span>Cornell University student learning track<br>China-based clinical and AI education</span>
