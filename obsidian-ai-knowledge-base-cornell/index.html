@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Obsidian + Codex: Building a Local-First AI Knowledge Base</title>
+  <style>
+    :root {
+      --cornell: #b31b1b;
+      --ink: #1c1b1a;
+      --muted: #67615c;
+      --line: #ded8d1;
+      --paper: #fffdf8;
+      --wash: #f5efe6;
+      --sage: #dce8dc;
+      --blue: #dcebf5;
+      --gold: #f3dfad;
+      --shadow: 0 18px 50px rgba(43, 34, 27, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fbf7ef 0%, #f7f4ec 55%, #fbfaf6 100%);
+      letter-spacing: 0;
+    }
+
+    .deck {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 24px;
+      background: rgba(255, 253, 248, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--cornell);
+      color: var(--cornell);
+      font-weight: 800;
+      font-size: 15px;
+      flex: none;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .brand span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      background: #fffaf1;
+      color: var(--ink);
+      padding: 7px 11px;
+      border-radius: 7px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button[aria-pressed="true"] {
+      border-color: var(--cornell);
+      color: var(--cornell);
+      background: #fff;
+    }
+
+    main {
+      width: min(1220px, calc(100vw - 36px));
+      margin: 0 auto;
+      padding: 24px 0 20px;
+    }
+
+    .slide {
+      display: none;
+      min-height: calc(100vh - 142px);
+      background: rgba(255, 253, 248, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .slide.active {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(330px, 0.95fr);
+    }
+
+    .content {
+      padding: clamp(24px, 4vw, 52px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .visual {
+      background: linear-gradient(180deg, #f8f1e8, #fffdf8);
+      border-left: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 3vw, 36px);
+    }
+
+    .visual img {
+      width: 100%;
+      max-height: 62vh;
+      object-fit: contain;
+      border: 1px solid #eee5da;
+      background: white;
+    }
+
+    .source-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: -8px;
+    }
+
+    .shot-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      align-content: center;
+    }
+
+    .shot-tile {
+      background: white;
+      border: 1px solid #eee5da;
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .shot-tile img {
+      width: 100%;
+      height: 150px;
+      max-height: none;
+      object-fit: cover;
+      border: 0;
+      display: block;
+    }
+
+    .shot-tile span {
+      display: block;
+      min-height: 40px;
+      padding: 8px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.25;
+      background: #fffaf2;
+    }
+
+    .shot-grid.compact .shot-tile img {
+      height: 118px;
+    }
+
+    .eyebrow {
+      color: var(--cornell);
+      font-size: 13px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1, h2 {
+      margin: 0;
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 74px);
+      max-width: 850px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 4vw, 54px);
+      max-width: 760px;
+    }
+
+    .lede {
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.45;
+      color: #332d28;
+      max-width: 760px;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .lang-card {
+      border: 1px solid var(--line);
+      background: #fffaf2;
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 100%;
+    }
+
+    .lang-card h3 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      color: var(--cornell);
+    }
+
+    .lang-card p,
+    .lang-card li {
+      color: #38322d;
+      font-size: 16px;
+      line-height: 1.58;
+    }
+
+    .lang-card p { margin: 0 0 11px; }
+    .lang-card p:last-child { margin-bottom: 0; }
+    ul, ol { padding-left: 20px; margin: 0; }
+    li + li { margin-top: 8px; }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.94em;
+      background: #f4eee5;
+      border: 1px solid #e6ded2;
+      padding: 1px 5px;
+      border-radius: 5px;
+    }
+
+    .codebox {
+      margin: 0;
+      padding: 18px;
+      background: #1f2421;
+      color: #f7f1e8;
+      border-radius: 8px;
+      overflow: auto;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .grid4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .tile {
+      border: 1px solid var(--line);
+      background: #fffaf2;
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 120px;
+    }
+
+    .tile b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--cornell);
+    }
+
+    .tile span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.42;
+    }
+
+    footer {
+      width: min(1220px, calc(100vw - 36px));
+      margin: 0 auto;
+      padding: 0 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress {
+      width: min(360px, 38vw);
+      height: 8px;
+      background: #e8dfd2;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0;
+      background: var(--cornell);
+    }
+
+    body.lang-en .zh { display: none; }
+    body.lang-zh .en { display: none; }
+    body.lang-both .only { display: none; }
+    body.lang-en .columns,
+    body.lang-zh .columns {
+      grid-template-columns: 1fr;
+    }
+
+    @media (max-width: 900px) {
+      header { align-items: flex-start; padding: 12px 16px; }
+      .slide.active { grid-template-columns: 1fr; }
+      .visual { border-left: 0; border-top: 1px solid var(--line); }
+      .columns, .grid4 { grid-template-columns: 1fr; }
+      .shot-grid { grid-template-columns: 1fr; }
+      main { width: min(100vw - 20px, 760px); padding-top: 12px; }
+      footer { width: min(100vw - 20px, 760px); }
+      .slide { min-height: auto; }
+      .visual img { max-height: none; }
+      .progress { width: 140px; }
+    }
+
+    @media print {
+      header, footer { display: none; }
+      main { width: 100%; padding: 0; }
+      .slide, .slide.active {
+        display: grid;
+        grid-template-columns: 1fr 0.7fr;
+        min-height: 100vh;
+        break-after: page;
+        border: 0;
+        box-shadow: none;
+      }
+      body { background: white; }
+      body.lang-en .zh,
+      body.lang-zh .en,
+      body.lang-both .only { display: initial; }
+    }
+  </style>
+</head>
+<body class="lang-both">
+  <div class="deck">
+    <header>
+      <div class="brand">
+        <div class="mark">C</div>
+        <div>
+          <strong>Obsidian + Codex Knowledge Base</strong>
+          <span>Cornell-ready bilingual courseware / 中英双语课件</span>
+        </div>
+      </div>
+      <div class="controls" aria-label="Deck controls">
+        <button type="button" id="prev">Prev</button>
+        <button type="button" id="next">Next</button>
+        <button type="button" data-lang="en" aria-pressed="false">English</button>
+        <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="slide active">
+        <div class="content">
+          <div class="eyebrow">Module 1 / 第一模块</div>
+          <h1>Obsidian + Codex: Building a Local-First AI Knowledge Base</h1>
+          <p class="lede en only">A practical way for college students to turn notes, readings, projects, and AI conversations into a durable learning system.</p>
+          <p class="lede zh only">一套给大学生用的实践方法：把课堂笔记、阅读资料、项目记录和 AI 对话沉淀成长期可复用的学习系统。</p>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>This course does not start with databases or complex AI infrastructure. It starts with a folder of plain Markdown files that both you and Codex can read.</p>
+              <p>The goal is simple: make your knowledge portable, searchable, reviewable, and useful in future work.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>这门课不从数据库或复杂 AI 架构开始，而是从一个普通 Markdown 文件夹开始。你能读，Codex 也能读。</p>
+              <p>目标很简单：让知识可迁移、可搜索、可复盘，并能在未来任务中继续发挥作用。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/01-vault-folder.png" alt="A hand-drawn traveler gathering notes into a vault folder"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Core idea / 核心概念</div>
+          <h2>A knowledge base is not a chatbot memory. It is a readable working library.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>Chat history is fragile. A knowledge base is different: it is a set of files that you can inspect, edit, cite, back up, and reorganize.</p>
+              <p>For students, this matters because learning is cumulative. Readings, lecture notes, lab observations, and project decisions should not disappear inside one conversation window.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>聊天记录很脆弱。知识库不同，它是一组你可以查看、编辑、引用、备份和重新组织的文件。</p>
+              <p>对学生来说，这很重要，因为学习是累积过程。阅读笔记、课堂记录、实验观察、项目决策，不应该消失在某个聊天窗口里。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/02-markdown-codex.png" alt="Markdown notes under a Codex lamp"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Why local-first / 为什么本地优先</div>
+          <h2>Start with files before you start with infrastructure.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <ul>
+                <li><b>Markdown</b> keeps notes readable outside any app.</li>
+                <li><b>Local folders</b> keep ownership clear.</li>
+                <li><b>Obsidian</b> adds links, search, graph views, and plugins.</li>
+                <li><b>Codex</b> can work directly with the files when you choose the vault as the workspace.</li>
+              </ul>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <ul>
+                <li><b>Markdown</b> 让笔记离开任何 App 仍可阅读。</li>
+                <li><b>本地文件夹</b> 让所有权清楚。</li>
+                <li><b>Obsidian</b> 提供双链、搜索、图谱和插件。</li>
+                <li><b>Codex</b> 可以在你选择 vault 作为工作区后直接处理这些文件。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/01-vault-folder.png" alt="Vault as a local folder"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">KISS / 简单优先</div>
+          <h2>Do not start with RAG if a folder and a template solve the first problem.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>RAG, vector databases, and automation can be useful later. They are not the first step for a student learning system.</p>
+              <p>The first step is a repeatable habit: capture a source, summarize it, link it, and review it.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>RAG、向量数据库和自动化以后可能有用，但不是学生知识系统的第一步。</p>
+              <p>第一步是一个可重复的习惯：收集来源、总结内容、建立链接、定期复盘。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/05-workflow-map.png" alt="A gentle workflow map"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Source workflow / 原文融合</div>
+          <h2>The source post gives us a practical five-minute path.</h2>
+          <p class="source-note">Source: raw/articles/5分钟教你组建和 AI 共同的知识库.md, based on a 2026-07-04 X post by @Vinkyu567.</p>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>The original article makes a useful teaching point: do not begin with RAG, vector databases, or automation plugins. Begin with Obsidian, Markdown, fixed templates, and AI-assisted organization.</p>
+              <p>For Cornell students, this is the shortest bridge from scattered course material to a durable learning vault.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>原文最重要的判断是：不要一开始就研究 RAG、向量数据库或自动化插件。先用 Obsidian、Markdown、固定模板和 AI 辅助整理跑通。</p>
+              <p>对 Cornell 学生来说，这就是从散乱课程资料走向长期学习仓库的最短路径。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/source-screenshots/01-source-overview.jpg" alt="Source post overview screenshot"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Five-minute setup / 五分钟搭建</div>
+          <h2>Install Obsidian, create a private GitHub repo, then open the cloned folder as a vault.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <ol>
+                <li>Download Obsidian from the official site.</li>
+                <li>Create a private GitHub repository for sync.</li>
+                <li>Clone it locally with GitHub Desktop or Git.</li>
+                <li>Open that local folder in Obsidian.</li>
+              </ol>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <ol>
+                <li>从官网下载 Obsidian。</li>
+                <li>在 GitHub 创建私有仓库用于同步。</li>
+                <li>用 GitHub Desktop 或 Git 克隆到本地。</li>
+                <li>在 Obsidian 中打开这个本地文件夹。</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="visual">
+          <div class="shot-grid">
+            <div class="shot-tile"><img src="assets/source-screenshots/02-obsidian-sync-price.png" alt="Obsidian sync pricing screenshot"><span>Official app and sync context</span></div>
+            <div class="shot-tile"><img src="assets/source-screenshots/03-github-private-repo.jpg" alt="GitHub private repo screenshot"><span>Create a private repository</span></div>
+            <div class="shot-tile"><img src="assets/source-screenshots/04-open-folder-in-obsidian.png" alt="Open folder in Obsidian screenshot"><span>Open the cloned folder in Obsidian</span></div>
+            <div class="shot-tile"><img src="assets/source-screenshots/09-codex-project-folder.jpg" alt="Codex project folder screenshot"><span>Select the vault folder in Codex</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Git plugin path / Git 插件路线</div>
+          <h2>Obsidian Git connects the local vault to the private backup lane.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>The source post shows the common path: enable community plugins, find the Git plugin, enable it, and configure an auto-backup rhythm.</p>
+              <p>In a class setting, students should understand what Git is doing before enabling frequent automatic commits.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>原文展示了常见路线：打开第三方插件，找到 Git 插件，启用它，再设置自动备份节奏。</p>
+              <p>在课堂里，学生应该先理解 Git 在做什么，再启用高频自动提交。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual">
+          <div class="shot-grid">
+            <div class="shot-tile"><img src="assets/source-screenshots/05-community-plugins.jpg" alt="Community plugins settings screenshot"><span>Enable community plugins</span></div>
+            <div class="shot-tile"><img src="assets/source-screenshots/06-plugin-market-git.png" alt="Git plugin market screenshot"><span>Find Obsidian Git</span></div>
+            <div class="shot-tile"><img src="assets/source-screenshots/07-obsidian-git-settings.jpg" alt="Obsidian Git settings screenshot"><span>Configure backup behavior</span></div>
+            <div class="shot-tile"><img src="assets/source-screenshots/08-gitignore.png" alt="gitignore screenshot"><span>Use .gitignore for local state</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Capture tools / 收集工具</div>
+          <h2>After the vault exists, add capture tools only when they serve the workflow.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>The source article recommends Xiaohongshu Importer and Obsidian Web Clipper. For international students, the general lesson is broader: choose capture tools based on where your learning material actually lives.</p>
+              <p>Web Clipper is best treated as a browser-side companion. Importers are optional and source-specific.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>原文推荐了 Xiaohongshu Importer 和 Obsidian Web Clipper。对国际学生来说，更通用的原则是：资料在哪里，就选择对应的收集工具。</p>
+              <p>Web Clipper 更像浏览器侧的收集助手；Importer 是可选的、来源特定的工具。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual">
+          <div class="shot-grid compact">
+            <div class="shot-tile"><img src="assets/source-screenshots/10-plugin-recommendations.jpg" alt="Plugin recommendation screenshot"><span>Capture plugins and browser clipping</span></div>
+            <div class="shot-tile"><img src="assets/04-plugin-bento.png" alt="Plugin bento illustration"><span>Install tools by workflow, not by hype</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Minimum viable vault / 最小可用仓库</div>
+          <h2>One vault. A few folders. One operating manual for AI.</h2>
+          <pre class="codebox">my-learning-vault/
+  inbox/
+  sources/
+  notes/
+  projects/
+  templates/
+  assets/
+  AGENTS.md</pre>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p><span class="mono">AGENTS.md</span> tells Codex how to work with this vault: what to read first, where to place outputs, what not to touch, and how to cite sources.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p><span class="mono">AGENTS.md</span> 是写给 Codex 的操作手册：先读哪里、产物放哪里、哪些不能动、来源如何标注。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/02-markdown-codex.png" alt="Markdown and AI collaboration"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Vault vs configuration / 仓库与配置</div>
+          <h2>The vault is your knowledge. <span class="mono">.obsidian/</span> is mostly app configuration.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>A vault is just a folder. Your notes are normal files. The <span class="mono">.obsidian/</span> folder stores settings, workspace layout, and plugin state.</p>
+              <p>When syncing with Git, be intentional about which config files you include. Some teams sync selected settings; beginners can start by excluding most local state.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>Vault 本质上只是文件夹。你的知识是普通文件。<span class="mono">.obsidian/</span> 多数是设置、界面布局和插件状态。</p>
+              <p>用 Git 同步时，要有意识地决定同步哪些配置。初学者可以先排除大部分本地状态，后面再精细调整。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/03-private-sync.png" alt="Private sync with gitignore"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Private sync / 私有同步</div>
+          <h2>GitHub can be a private backup lane, not a public notebook.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <ul>
+                <li>Use a private repository for personal notes.</li>
+                <li>Never commit API keys, tokens, passwords, or private identity data.</li>
+                <li>Use <span class="mono">.gitignore</span> to exclude caches, local settings, and sensitive files.</li>
+                <li>Remember: sync helps, but it is not the same as a complete backup strategy.</li>
+              </ul>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <ul>
+                <li>个人笔记使用私有仓库。</li>
+                <li>不要提交 API key、token、密码或私人身份信息。</li>
+                <li>用 <span class="mono">.gitignore</span> 排除缓存、本地设置和敏感文件。</li>
+                <li>记住：同步有帮助，但不等于完整备份策略。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/03-private-sync.png" alt="A private repository bookshelf"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Plugin policy / 插件策略</div>
+          <h2>Plugins are tools for workflows, not trophies for collection.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>Install plugins only after you know the job they serve. A stable student vault usually needs fewer tools than the internet suggests.</p>
+              <p>Start with capture, sync, templates, and visual notes. Add database-like tools only when your notes become structured enough to query.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>先知道插件解决什么问题，再安装。稳定的学生知识库，通常不需要网上推荐的那么多工具。</p>
+              <p>先解决收集、同步、模板、视觉笔记。等笔记结构足够稳定，再考虑查询型工具。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/04-plugin-bento.png" alt="Plugins as bento compartments"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Recommended layers / 推荐分层</div>
+          <h2>A conservative plugin stack for beginners.</h2>
+          <div class="grid4">
+            <div class="tile"><b>Sync</b><span>Obsidian Git, only after Git basics are clear.</span></div>
+            <div class="tile"><b>Capture</b><span>Obsidian Web Clipper or browser capture tools.</span></div>
+            <div class="tile"><b>Structure</b><span>Templates first; Dataview later if needed.</span></div>
+            <div class="tile"><b>Visuals</b><span>Excalidraw for sketches, maps, and lecture diagrams.</span></div>
+          </div>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>The browser Web Clipper is not the same kind of thing as an Obsidian community plugin. Treat it as a capture companion.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>浏览器 Web Clipper 不完全等同于 Obsidian 内部社区插件。更准确地说，它是一个网页收集工具。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/04-plugin-bento.png" alt="A small plugin tray"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Codex collaboration / Codex 协作</div>
+          <h2>Use Codex as a librarian, editor, and project assistant, not as an invisible memory box.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <ul>
+                <li>Ask Codex to organize new sources into the right folders.</li>
+                <li>Ask it to create summaries with source links.</li>
+                <li>Ask it to build project indexes and reading maps.</li>
+                <li>Review every important change before treating it as knowledge.</li>
+              </ul>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <ul>
+                <li>让 Codex 把新资料整理进正确目录。</li>
+                <li>让它生成带来源的摘要。</li>
+                <li>让它建立项目索引和阅读地图。</li>
+                <li>重要内容进入知识库前，仍然需要人来复核。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/02-markdown-codex.png" alt="Codex reading markdown notes"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Operating loop / 操作闭环</div>
+          <h2>Capture, clean, connect, compile, ask, review.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <ol>
+                <li>Capture the source.</li>
+                <li>Clean the note into readable Markdown.</li>
+                <li>Connect it to existing topics.</li>
+                <li>Compile summaries and concept pages.</li>
+                <li>Ask Codex to use the vault for a real task.</li>
+                <li>Review what changed.</li>
+              </ol>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <ol>
+                <li>收集来源。</li>
+                <li>清理成可读 Markdown。</li>
+                <li>连接到已有主题。</li>
+                <li>编译摘要和概念页。</li>
+                <li>让 Codex 基于知识库完成真实任务。</li>
+                <li>复核改动。</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/05-workflow-map.png" alt="Capture clean connect compile ask review"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Student use cases / 学生场景</div>
+          <h2>Where this helps at Cornell or any research university.</h2>
+          <div class="grid4">
+            <div class="tile"><b>Course reading</b><span>Turn weekly readings into linked summaries.</span></div>
+            <div class="tile"><b>Research lab</b><span>Track papers, protocols, meetings, and decisions.</span></div>
+            <div class="tile"><b>Project work</b><span>Keep specs, drafts, data notes, and retrospectives together.</span></div>
+            <div class="tile"><b>Career prep</b><span>Maintain resumes, cover letters, writing samples, and interview notes.</span></div>
+          </div>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>The point is not to store everything. The point is to keep the material you will reuse.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>重点不是把一切都存进去，而是留下未来会复用的材料。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/01-vault-folder.png" alt="Reusable student knowledge"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Prompt templates / 可执行提示词</div>
+          <h2>Give Codex a concrete job inside the vault.</h2>
+          <pre class="codebox">Read AGENTS.md first.
+Then process the files in inbox/.
+For each source:
+- create a concise summary in notes/
+- preserve the original source link
+- add 3-5 topic links
+- update projects/course-index.md
+Do not delete or rewrite original source files.</pre>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>Good prompts define scope, input, output path, evidence rules, and what not to do.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>好的提示词会说明范围、输入、输出路径、证据规则，以及禁止事项。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/05-workflow-map.png" alt="A prompt as a workflow map"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Safety / 安全边界</div>
+          <h2>Private notes still need privacy rules.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <ul>
+                <li>Do not store secrets in notes.</li>
+                <li>Do not paste private pages into third-party AI tools.</li>
+                <li>Use private repositories for personal vaults.</li>
+                <li>Ask Codex to report before destructive changes.</li>
+                <li>Keep source material traceable.</li>
+              </ul>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <ul>
+                <li>不要把密钥写进笔记。</li>
+                <li>不要把私人页面交给第三方网页 AI。</li>
+                <li>个人 vault 使用私有仓库。</li>
+                <li>破坏性操作前让 Codex 先报告。</li>
+                <li>保留来源可追溯。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/03-private-sync.png" alt="Private safety rules"></div>
+      </section>
+
+      <section class="slide">
+        <div class="content">
+          <div class="eyebrow">Final model / 最终模型</div>
+          <h2>Five-minute setup gets you started. A review loop makes it last.</h2>
+          <div class="columns">
+            <div class="lang-card en">
+              <h3>English</h3>
+              <p>The durable version is not just Obsidian plus plugins. It is a small operating system for learning: files, templates, source rules, AI instructions, review habits, and privacy boundaries.</p>
+              <p>Keep it simple enough that you will actually use it next week.</p>
+            </div>
+            <div class="lang-card zh">
+              <h3>中文</h3>
+              <p>可持续版本不只是 Obsidian 加插件，而是一套学习操作系统：文件、模板、来源规则、AI 指令、复盘习惯和隐私边界。</p>
+              <p>保持足够简单，这样下周你还会继续用它。</p>
+            </div>
+          </div>
+        </div>
+        <div class="visual"><img src="assets/05-workflow-map.png" alt="Sustainable learning workflow"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span id="counter">1 / 14</span>
+      <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+      <span>Use arrow keys / 可用方向键翻页</span>
+    </footer>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    const bar = document.getElementById('bar');
+    const langButtons = Array.from(document.querySelectorAll('[data-lang]'));
+    let index = 0;
+
+    function show(nextIndex) {
+      index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      bar.style.width = `${((index + 1) / slides.length) * 100}%`;
+      document.title = `${index + 1}/${slides.length} Obsidian + Codex Courseware`;
+    }
+
+    document.getElementById('prev').addEventListener('click', () => show(index - 1));
+    document.getElementById('next').addEventListener('click', () => show(index + 1));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === 'PageDown') show(index + 1);
+      if (event.key === 'ArrowLeft' || event.key === 'PageUp') show(index - 1);
+      if (event.key === 'Home') show(0);
+      if (event.key === 'End') show(slides.length - 1);
+    });
+
+    langButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const lang = button.dataset.lang;
+        document.body.classList.remove('lang-both', 'lang-en', 'lang-zh');
+        document.body.classList.add(`lang-${lang}`);
+        langButtons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      });
+    });
+
+    show(0);
+  </script>
+</body>
+</html>
