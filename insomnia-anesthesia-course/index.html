@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anesthesia-Led Insomnia Care | Bilingual Self-Guided Course</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #5d6975;
+      --paper: #fbf7ef;
+      --panel: #ffffff;
+      --blue: #325f73;
+      --teal: #4d8b84;
+      --sage: #8da878;
+      --coral: #c86f61;
+      --line: #e3ddd2;
+      --shadow: 0 18px 44px rgba(31, 41, 51, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: var(--blue); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 6vw;
+      background: rgba(251, 247, 239, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand strong { display: block; font-size: 15px; color: var(--blue); }
+    .brand span { display: block; font-size: 12px; color: var(--muted); }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav a,
+    .lang-button {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      padding: 8px 12px;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .lang-button.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+      gap: 36px;
+      align-items: center;
+      padding: 52px 6vw 38px;
+    }
+
+    .eyebrow {
+      color: var(--coral);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(34px, 6vw, 62px);
+      line-height: 1.02;
+      letter-spacing: 0;
+      color: #183a48;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-card,
+    .card,
+    .callout,
+    .quiz,
+    .figure-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card { overflow: hidden; }
+    .hero-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+    .hero-card-body { padding: 18px; }
+    .hero-card-body p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+      max-width: 800px;
+    }
+
+    .stat {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .stat strong { display: block; font-size: 24px; color: var(--blue); }
+    .stat span { display: block; color: var(--muted); font-size: 13px; }
+
+    .section {
+      padding: 34px 6vw;
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      color: #183a48;
+      font-size: clamp(26px, 4vw, 42px);
+      letter-spacing: 0;
+    }
+
+    .section-intro {
+      max-width: 920px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card { overflow: hidden; }
+    .card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #fff; }
+    .card-body { padding: 20px; }
+    .card h3 { margin: 0 0 8px; color: var(--blue); font-size: 22px; }
+    .card p { margin: 0 0 12px; color: var(--muted); }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 5px 9px;
+      background: #eef4f1;
+      color: #34584d;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .step {
+      padding: 16px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .step strong {
+      display: block;
+      color: var(--coral);
+      margin-bottom: 6px;
+    }
+
+    .step p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .figure-box {
+      margin-top: 22px;
+      overflow: hidden;
+    }
+
+    .figure-box img { width: 100%; background: #fff; }
+    .caption { padding: 12px 16px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+
+    .callout {
+      padding: 18px;
+      border-left: 5px solid var(--coral);
+      box-shadow: none;
+      margin-top: 20px;
+    }
+
+    .callout strong { color: #7f3a32; }
+    .callout p { margin: 8px 0 0; color: var(--muted); }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .mini {
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 16px;
+    }
+
+    .mini h3 { margin: 0 0 8px; color: var(--teal); }
+    .mini ul { margin: 0; padding-left: 18px; color: var(--muted); }
+
+    .quiz {
+      padding: 22px;
+      box-shadow: none;
+    }
+
+    .quiz ol { margin: 0; padding-left: 22px; color: var(--muted); }
+
+    .sources {
+      padding: 28px 6vw 46px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .sources h2 { font-size: 22px; color: var(--blue); }
+
+    [data-lang="zh"] .en,
+    [data-lang="en"] .zh { display: none; }
+
+    @media (max-width: 900px) {
+      .hero,
+      .cards,
+      .compare,
+      .flow { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body data-lang="zh">
+  <header class="topbar">
+    <div class="brand">
+      <strong>Anesthesia-Led Insomnia Care</strong>
+      <span>Self-guided bilingual course for a Cornell first-year observer</span>
+    </div>
+    <nav class="nav" aria-label="Course navigation">
+      <a href="#overview">Overview</a>
+      <a href="#methods">Methods</a>
+      <a href="#safety">Safety</a>
+      <a href="#quiz">Self-check</a>
+      <button class="lang-button active" type="button" data-set-lang="zh">中文</button>
+      <button class="lang-button" type="button" data-set-lang="en">English</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="overview">
+      <div>
+        <p class="eyebrow">Sleep medicine · Anesthesiology · Integrative care</p>
+        <h1>
+          <span class="zh">麻醉科视角下的失眠辅助治疗</span>
+          <span class="en">Anesthesia-Led Insomnia Care</span>
+        </h1>
+        <p class="lead zh">
+          这是一份给 Cornell University 大一学生自学的入门课件。它解释麻醉科为什么会关注失眠，以及右美托咪定滴定、行为认知疗法、星状神经节阻滞、颊针和其他综合手段在失眠管理中的位置。
+        </p>
+        <p class="lead en">
+          This self-guided course introduces why anesthesiologists may participate in selected insomnia care, including dexmedetomidine titration, cognitive behavioral therapy for insomnia, stellate ganglion block, buccal acupuncture, and multimodal sleep support.
+        </p>
+        <div class="stats" aria-label="Course summary">
+          <div class="stat"><strong>10</strong><span>visual teaching figures</span></div>
+          <div class="stat"><strong>Safety first</strong><span>monitoring, selection, and follow-up</span></div>
+          <div class="stat"><strong>Not a protocol</strong><span>educational overview only</span></div>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <img src="assets/insomnia-illustrations/01-care-map.png" alt="Anesthesia-led insomnia care map">
+        <div class="hero-card-body">
+          <p class="zh">总览图：失眠治疗不是单一技术，而是评估、行为治疗、镇静监测、自主神经调节、辅助疗法和随访共同组成的系统。</p>
+          <p class="en">Overview: insomnia care is not a single technique. It combines assessment, behavioral therapy, monitored sedation, autonomic modulation, adjunctive methods, and follow-up.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">先建立一个安全边界</span><span class="en">Start With Safety Boundaries</span></h2>
+      <p class="section-intro zh">
+        本课件不提供个体化医疗建议、药物剂量或操作流程。它的目标是让初学者理解：麻醉科的优势在于监测、镇静、镇痛、自主神经调节和围术期风险管理，但每一种干预都需要评估适应证、禁忌证和随访。
+      </p>
+      <p class="section-intro en">
+        This course does not provide individual medical advice, dosing, or procedural instructions. Its purpose is to help a beginner understand the anesthesiology perspective: monitoring, sedation, analgesia, autonomic modulation, and perioperative risk management all require patient selection and follow-up.
+      </p>
+      <div class="callout">
+        <strong class="zh">最重要的一句话：</strong>
+        <strong class="en">The key sentence:</strong>
+        <p class="zh">CBT-I 是慢性失眠的核心基础；右美托咪定、星状神经节阻滞和颊针更适合被理解为特定情境下的辅助或探索性工具，而不是通用答案。</p>
+        <p class="en">CBT-I is a core foundation for chronic insomnia; dexmedetomidine, stellate ganglion block, and buccal acupuncture are better understood as selective or adjunctive tools, not universal answers.</p>
+      </div>
+    </section>
+
+    <section class="section" id="methods">
+      <h2><span class="zh">学习路线</span><span class="en">Learning Route</span></h2>
+      <div class="flow">
+        <div class="step">
+          <strong>1. Assess</strong>
+          <p class="zh">识别失眠类型、持续时间、疼痛、焦虑、药物、睡眠呼吸问题和安全风险。</p>
+          <p class="en">Identify insomnia pattern, duration, pain, anxiety, medications, sleep-disordered breathing, and safety risks.</p>
+        </div>
+        <div class="step">
+          <strong>2. Stabilize</strong>
+          <p class="zh">先处理疼痛、焦虑、昼夜节律和不良睡眠行为。</p>
+          <p class="en">Address pain, anxiety, circadian rhythm, and maladaptive sleep behaviors first.</p>
+        </div>
+        <div class="step">
+          <strong>3. Select</strong>
+          <p class="zh">根据患者、场景和证据强度选择合适工具。</p>
+          <p class="en">Match the tool to the patient, setting, and evidence strength.</p>
+        </div>
+        <div class="step">
+          <strong>4. Monitor</strong>
+          <p class="zh">任何镇静、阻滞或针刺相关干预都要有监测、记录和复盘。</p>
+          <p class="en">Any sedation, block, or needle-based intervention requires monitoring, documentation, and review.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">为什么失眠会形成恶性循环</span><span class="en">Why Insomnia Becomes a Loop</span></h2>
+      <p class="section-intro zh">
+        很多患者不是简单地“不想睡”。疼痛、焦虑、交感兴奋和睡眠不足会相互放大。麻醉科参与失眠相关照护时，通常会从疼痛控制、焦虑降低、自主神经稳定和安全镇静几个方向切入。
+      </p>
+      <p class="section-intro en">
+        Many patients are not simply “choosing not to sleep.” Pain, anxiety, sympathetic arousal, and poor sleep reinforce each other. Anesthesiology-related care often targets pain control, anxiety reduction, autonomic stability, and safe sedation.
+      </p>
+      <div class="figure-box">
+        <img src="assets/insomnia-illustrations/05-pain-anxiety-sleep-cycle.png" alt="Pain anxiety sleep cycle">
+        <div class="caption">Figure 1. Pain, anxiety, sympathetic arousal, and poor sleep can amplify one another.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">CBT-I：行为认知疗法是基础</span><span class="en">CBT-I: The Behavioral Foundation</span></h2>
+      <div class="compare">
+        <div class="mini">
+          <h3>What it changes</h3>
+          <ul>
+            <li><span class="zh">床与清醒焦虑之间的错误连接</span><span class="en">The learned link between bed and wakeful anxiety</span></li>
+            <li><span class="zh">不规律起床和补觉带来的节律混乱</span><span class="en">Rhythm disruption from irregular wake time and catch-up sleep</span></li>
+            <li><span class="zh">对睡眠的灾难化想法</span><span class="en">Catastrophic thoughts about sleep</span></li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h3>Why students should know it</h3>
+          <ul>
+            <li><span class="zh">它是慢性失眠最重要的非药物治疗之一</span><span class="en">It is one of the most important non-drug treatments for chronic insomnia</span></li>
+            <li><span class="zh">它帮助患者重新建立可持续的睡眠行为</span><span class="en">It helps rebuild sustainable sleep behaviors</span></li>
+            <li><span class="zh">它常常与其他治疗共同使用</span><span class="en">It can be combined with other approaches</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="figure-box">
+        <img src="assets/insomnia-illustrations/04-cbt-i-sleep-route.png" alt="CBT-I sleep route hand-drawn illustration">
+        <div class="caption">Figure 2. CBT-I rebuilds a quiet, repeatable route toward sleep.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">右美托咪定滴定：镇静与监测</span><span class="en">Dexmedetomidine Titration: Sedation and Monitoring</span></h2>
+      <p class="section-intro zh">
+        右美托咪定是 alpha-2 受体激动剂，临床上常用于镇静、降低交感兴奋和减少焦虑样唤醒。对于失眠相关场景，它应被理解为需要严密监测的选择性工具，而不是普通助眠药。
+      </p>
+      <p class="section-intro en">
+        Dexmedetomidine is an alpha-2 agonist used clinically for sedation, sympathetic attenuation, and reduced arousal. In insomnia-related settings, it should be understood as a monitored selective tool, not a routine sleeping pill.
+      </p>
+      <div class="figure-box">
+        <img src="assets/insomnia-illustrations/02-dexmedetomidine-sleep-circuit.png" alt="Dexmedetomidine and sleep-wake circuit">
+        <div class="caption">Figure 3. A simplified view of dexmedetomidine, arousal pathways, and required monitoring.</div>
+      </div>
+      <div class="callout">
+        <strong>Clinical caution</strong>
+        <p class="zh">需要特别关注心动过缓、低血压、过度镇静、气道安全和药物相互作用。本课件不提供剂量。</p>
+        <p class="en">Pay attention to bradycardia, hypotension, oversedation, airway safety, and drug interactions. This course does not provide dosing.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">星状神经节阻滞：自主神经调节</span><span class="en">Stellate Ganglion Block: Autonomic Modulation</span></h2>
+      <p class="section-intro zh">
+        星状神经节阻滞可以影响颈胸交感通路，因此在疼痛、应激、高唤醒状态和部分睡眠相关问题中受到关注。对初学者来说，重点不是记住操作，而是理解它为什么属于麻醉科的能力范围：解剖定位、超声引导、局麻药安全和术后观察。
+      </p>
+      <p class="section-intro en">
+        Stellate ganglion block can influence cervical-thoracic sympathetic pathways, which is why it is discussed in pain, stress, hyperarousal, and selected sleep-related problems. For beginners, the goal is not to learn the procedure, but to understand why it belongs to anesthesiology: anatomy, ultrasound guidance, local anesthetic safety, and post-block observation.
+      </p>
+      <div class="figure-box">
+        <img src="assets/insomnia-illustrations/03-stellate-ganglion-block.png" alt="Stellate ganglion block and hyperarousal">
+        <div class="caption">Figure 4. Stellate ganglion block is an adjunctive, clinician-performed option with evolving evidence.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">颊针：辅助治疗的理解方式</span><span class="en">Buccal Acupuncture: How to Understand an Adjunct</span></h2>
+      <p class="section-intro zh">
+        颊针可以作为整合医学或辅助治疗的一部分介绍。教学时应避免把它说成“保证有效”。更稳妥的表达是：它可能通过感觉输入、放松反应、自主神经调节和患者偏好参与治疗过程，但需要规范操作、无菌意识、禁忌证筛查和效果记录。
+      </p>
+      <p class="section-intro en">
+        Buccal acupuncture can be introduced as part of integrative or adjunctive care. It should not be framed as a guaranteed cure. A safer explanation is that sensory input, relaxation response, autonomic regulation, and patient preference may contribute, while sterile technique, contraindication screening, and response documentation remain essential.
+      </p>
+      <div class="figure-box">
+        <img src="assets/insomnia-illustrations/06-buccal-acupuncture-adjunct.png" alt="Buccal acupuncture as adjunctive insomnia care">
+        <div class="caption">Figure 5. Buccal acupuncture is best taught as adjunctive care, not as a replacement for evidence-based insomnia treatment.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">怎样选择工具</span><span class="en">How to Select Tools</span></h2>
+      <p class="section-intro zh">
+        失眠管理要看患者是谁、问题持续多久、是否合并疼痛或焦虑、是否存在睡眠呼吸障碍、是否正在服用影响睡眠或呼吸的药物，以及治疗场景是否具备监测条件。
+      </p>
+      <p class="section-intro en">
+        Insomnia care depends on who the patient is, how long the problem has lasted, whether pain or anxiety is present, whether sleep-disordered breathing is possible, what medications are being used, and whether the care setting can provide monitoring.
+      </p>
+      <div class="figure-box">
+        <img src="assets/insomnia-illustrations/07-selection-matrix.png" alt="Insomnia care selection matrix">
+        <div class="caption">Figure 6. Treatment selection should reflect patient fit, target, monitoring needs, evidence strength, and caution.</div>
+      </div>
+    </section>
+
+    <section class="section" id="safety">
+      <h2><span class="zh">麻醉科最重要的价值：安全监测</span><span class="en">The Anesthesia Value: Safety Monitoring</span></h2>
+      <p class="section-intro zh">
+        麻醉科并不是只会“让人睡着”。更核心的能力是识别风险、维持氧合和循环稳定、观察镇静深度、处理不良反应并安排恢复和随访。
+      </p>
+      <p class="section-intro en">
+        Anesthesiology is not simply about “making people sleep.” Its core value is risk recognition, oxygenation and circulation stability, sedation-depth observation, adverse-event response, recovery planning, and follow-up.
+      </p>
+      <div class="figure-box">
+        <img src="assets/insomnia-illustrations/08-monitoring-safety.png" alt="Monitoring and safety checklist">
+        <div class="caption">Figure 7. Safety monitoring is the bridge between intervention and responsible care.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">其他综合手段</span><span class="en">Other Multimodal Tools</span></h2>
+      <p class="section-intro zh">
+        对多数失眠患者，真正有价值的往往是组合策略：睡眠卫生、固定起床时间、白天光照、疼痛控制、焦虑降低、放松训练、围术期环境管理、必要时药物或操作辅助。
+      </p>
+      <p class="section-intro en">
+        For many patients, the most useful approach is a combination: sleep hygiene, consistent wake time, daytime light, pain control, anxiety reduction, relaxation training, perioperative environment management, and selected medication or procedural adjuncts when appropriate.
+      </p>
+      <div class="figure-box">
+        <img src="assets/insomnia-illustrations/09-multimodal-toolbox.png" alt="Multimodal sleep support toolbox">
+        <div class="caption">Figure 8. A toolbox model helps students avoid overvaluing one single intervention.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">学生在见习时看什么</span><span class="en">What the Student Should Observe</span></h2>
+      <div class="cards">
+        <article class="card">
+          <div class="card-body">
+            <h3>Ask safely</h3>
+            <p class="zh">可以问：这个患者的失眠主要由疼痛、焦虑、节律紊乱还是高唤醒驱动？为什么选择这种辅助方式？如何监测安全？</p>
+            <p class="en">Good questions: Is this insomnia driven by pain, anxiety, circadian disruption, or hyperarousal? Why choose this adjunct? How is safety monitored?</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Avoid overclaiming</h3>
+            <p class="zh">不要把观察到的单个患者改善直接理解为某种方法一定有效。医学学习需要区分机制、经验、证据和个体差异。</p>
+            <p class="en">Do not turn one observed improvement into a universal claim. Medical learning separates mechanism, experience, evidence, and individual variation.</p>
+          </div>
+        </article>
+      </div>
+      <div class="figure-box">
+        <img src="assets/insomnia-illustrations/10-student-observation-path.png" alt="Student observation path">
+        <div class="caption">Figure 9. A student can learn by listening, observing, asking safely, and reflecting.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="zh">一页总复盘</span><span class="en">One-Page Review</span></h2>
+      <div class="figure-box">
+        <img src="assets/figure-contact-sheet.png" alt="Insomnia anesthesia course figure contact sheet">
+        <div class="caption">Figure 10. The complete visual map for anesthesia-led insomnia care.</div>
+      </div>
+    </section>
+
+    <section class="section" id="quiz">
+      <h2><span class="zh">自测问题</span><span class="en">Self-Check Questions</span></h2>
+      <div class="quiz">
+        <ol class="zh">
+          <li>为什么 CBT-I 应该放在慢性失眠治疗的基础位置？</li>
+          <li>右美托咪定用于失眠相关场景时，为什么必须强调监测而不是只讲“助眠”？</li>
+          <li>星状神经节阻滞可能通过什么路径影响高唤醒状态？证据边界是什么？</li>
+          <li>颊针作为辅助治疗时，怎样表达才不夸大？</li>
+          <li>如果患者合并疼痛、焦虑和睡眠差，麻醉科可以从哪些方面帮助打断循环？</li>
+        </ol>
+        <ol class="en">
+          <li>Why should CBT-I remain a foundation for chronic insomnia care?</li>
+          <li>Why does dexmedetomidine require monitoring rather than being described as a simple sleep aid?</li>
+          <li>How might stellate ganglion block influence hyperarousal, and what are the evidence boundaries?</li>
+          <li>How can buccal acupuncture be described without overstating its effect?</li>
+          <li>When pain, anxiety, and poor sleep coexist, how can anesthesiology help interrupt the cycle?</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sources">
+    <h2>Selected Reading</h2>
+    <p>
+      American Academy of Sleep Medicine guideline on behavioral and psychological treatments for chronic insomnia:
+      <a href="https://jcsm.aasm.org/doi/10.5664/jcsm.8986">J Clin Sleep Med guideline</a>.
+      American College of Physicians guideline emphasizing CBT-I as initial treatment:
+      <a href="https://www.acpjournals.org/doi/10.7326/M15-2175">ACP guideline</a>.
+      PubMed topic searches for continuing review:
+      <a href="https://pubmed.ncbi.nlm.nih.gov/?term=dexmedetomidine+sleep+quality+perioperative">dexmedetomidine and sleep quality</a>,
+      <a href="https://pubmed.ncbi.nlm.nih.gov/?term=stellate+ganglion+block+insomnia+sleep+quality">stellate ganglion block and sleep quality</a>,
+      <a href="https://pubmed.ncbi.nlm.nih.gov/?term=acupuncture+insomnia+systematic+review">acupuncture and insomnia systematic reviews</a>.
+    </p>
+    <p>
+      Educational disclaimer: this course is for introductory learning only. It is not a clinical protocol, treatment recommendation, or dosing guide.
+    </p>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll("[data-set-lang]");
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        document.body.dataset.lang = button.dataset.setLang;
+        buttons.forEach((item) => item.classList.toggle("active", item === button));
+      });
+    });
+  </script>
+</body>
+</html>
