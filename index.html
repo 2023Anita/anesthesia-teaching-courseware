@@ -102,25 +102,38 @@
     }
 
     .hero {
-      min-height: 78vh;
+      min-height: 72vh;
       display: grid;
       grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
       gap: 38px;
-      align-items: center;
-      padding: 58px 6vw 44px;
+      align-items: start;
+      padding: 36px 6vw 44px;
       background:
         linear-gradient(180deg, rgba(255,253,248,0.76), rgba(247,244,238,1)),
         linear-gradient(90deg, rgba(179,27,27,0.06), transparent 42%),
         radial-gradient(circle at 78% 18%, rgba(45,129,120,0.10), transparent 36%);
     }
 
+    .hero-intro {
+      min-width: 0;
+    }
+
+    .route-frame {
+      overflow: hidden;
+      width: min(860px, 100%);
+      aspect-ratio: 1400 / 620;
+      margin: 0 0 20px;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
     .route-illustration {
       display: block;
-      width: min(760px, 90%);
-      max-height: 330px;
+      width: 100%;
+      max-width: none;
+      height: 100%;
       object-fit: contain;
-      object-position: left center;
-      margin: 0 0 26px;
+      object-position: center center;
     }
 
     .affiliation {
@@ -474,9 +487,14 @@
       .stats { grid-template-columns: 1fr; }
       .contact-panel { grid-template-columns: 1fr; }
       .signature { justify-self: start; }
-      .route-illustration {
+      .route-frame {
         width: 100%;
-        max-height: none;
+        aspect-ratio: 16 / 8.8;
+      }
+      .route-illustration {
+        width: 108%;
+        height: 108%;
+        transform: translate(-3%, -4%);
       }
     }
 
@@ -487,6 +505,19 @@
       }
       .nav { justify-content: flex-start; }
       .course-preview { grid-template-columns: 1fr; }
+      .hero {
+        padding-top: 24px;
+      }
+      .route-frame {
+        aspect-ratio: 16 / 9;
+      }
+      .route-illustration {
+        width: 136%;
+        height: 108%;
+        object-fit: cover;
+        object-position: center bottom;
+        transform: translate(-15%, -3%);
+      }
     }
   </style>
 </head>
@@ -511,8 +542,10 @@
 
   <main>
     <section class="hero">
-      <div>
-        <img class="route-illustration" src="assets/site/cornell-jiangyin-study-route.png" alt="Hand-drawn route from Cornell to Jiangyin for studying AI and anesthesia in China">
+      <div class="hero-intro">
+        <div class="route-frame" aria-hidden="true">
+          <img class="route-illustration" src="assets/site/cornell-jiangyin-study-route.png" alt="">
+        </div>
         <div class="affiliation">
           <img src="assets/site/cornell-university-seal.png" alt="Cornell University seal">
           <span>Cornell University student learning track<br>China-based clinical and AI education</span>
