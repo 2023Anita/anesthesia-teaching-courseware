@@ -292,6 +292,23 @@
       margin-top: 24px;
     }
 
+    .hero-support-illustration {
+      overflow: hidden;
+      width: min(780px, 94%);
+      aspect-ratio: 16 / 4.4;
+      margin: 18px auto 0;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .hero-support-illustration img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 78%;
+    }
+
     .stat {
       border-top: 3px solid var(--teal);
       padding-top: 12px;
@@ -485,6 +502,7 @@
       }
       .hero { min-height: auto; }
       .stats { grid-template-columns: 1fr; }
+      .hero-support-illustration { display: none; }
       .contact-panel { grid-template-columns: 1fr; }
       .signature { justify-self: start; }
       .route-frame {
@@ -569,6 +587,9 @@
             <span>languages: Chinese and English</span>
           </div>
         </div>
+        <figure class="hero-support-illustration" aria-label="AI and anesthesia learning notes illustration">
+          <img src="assets/site/clinical-ai-learning-desk.png" alt="Hand-drawn illustration of a quiet learner organizing anesthesia observation, structure, and AI teaching notes in an open notebook">
+        </figure>
       </div>
       <aside class="hero-card">
         <h2>Program focus</h2>
