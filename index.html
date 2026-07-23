@@ -329,6 +329,69 @@
       font-size: 13px;
     }
 
+    .promo-section {
+      border-top: 1px solid rgba(216, 225, 230, 0.85);
+      border-bottom: 1px solid rgba(216, 225, 230, 0.85);
+      background:
+        linear-gradient(135deg, rgba(255, 253, 248, 0.92), rgba(247, 244, 238, 0.98)),
+        radial-gradient(circle at 82% 22%, rgba(45, 129, 120, 0.12), transparent 34%);
+    }
+
+    .promo-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .promo-copy {
+      min-width: 0;
+    }
+
+    .promo-copy h2 {
+      max-width: 540px;
+    }
+
+    .promo-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 18px;
+    }
+
+    .promo-tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--muted);
+      background: #ffffff;
+      font-size: 12px;
+    }
+
+    .promo-video {
+      overflow: hidden;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .promo-video video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--ink);
+    }
+
+    .promo-video figcaption {
+      padding: 10px 14px;
+      color: var(--muted);
+      background: var(--panel);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
     .section {
       padding: 26px 6vw 34px;
     }
@@ -501,7 +564,8 @@
       .hero,
       .cards,
       .note-grid,
-      .module-summary {
+      .module-summary,
+      .promo-layout {
         grid-template-columns: 1fr;
       }
       .hero { min-height: auto; }
@@ -551,6 +615,7 @@
     </div>
     <nav class="nav" aria-label="Page navigation">
       <a href="#courses">Courses</a>
+      <a href="#promo">Promo</a>
       <a href="#workflow">Workflow</a>
       <a href="#instructor">Instructor</a>
       <a href="#purpose">Purpose</a>
@@ -650,6 +715,34 @@
           </figure>
         </div>
       </aside>
+    </section>
+
+    <section class="section promo-section" id="promo">
+      <div class="promo-layout">
+        <div class="promo-copy">
+          <p class="eyebrow">Product film · Ink Press template</p>
+          <h2>A clearer map, in motion</h2>
+          <p class="section-intro">
+            See the courseware as a living product: real course cards, a real observer checklist, and a clinician-led workflow shaped with AI assistance.
+          </p>
+          <div class="promo-details" aria-label="Promo video details">
+            <span class="promo-tag">36 seconds</span>
+            <span class="promo-tag">1920 × 1080</span>
+            <span class="promo-tag">SFX only</span>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="assets/video/anesthesia-teaching-courseware-promo.mp4">Open video file</a>
+            <a class="button" href="https://github.com/2023Anita/anesthesia-teaching-courseware" target="_blank" rel="noreferrer">View repository</a>
+          </div>
+        </div>
+        <figure class="promo-video">
+          <video controls preload="metadata" playsinline poster="assets/video/anesthesia-teaching-courseware-promo-poster.jpg" aria-label="Anesthesia teaching courseware promotional video">
+            <source src="assets/video/anesthesia-teaching-courseware-promo.mp4" type="video/mp4">
+            <a href="assets/video/anesthesia-teaching-courseware-promo.mp4">Download the promo video</a>
+          </video>
+          <figcaption>AI + Anesthesia · clinician-led · AI-assisted · built for curious learners</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section class="section" id="courses">
