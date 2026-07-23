@@ -6,6 +6,12 @@ Live site: <https://2023anita.github.io/anesthesia-teaching-courseware/>
 
 ![Anesthesia teaching courseware preview](gyne-anesthesia-course/assets/figure-contact-sheet.png)
 
+## Promo video
+
+[![Watch the anesthesia teaching courseware promo](assets/video/anesthesia-teaching-courseware-promo-poster.jpg)](assets/video/anesthesia-teaching-courseware-promo.mp4)
+
+[Watch or download the 36-second promo video](assets/video/anesthesia-teaching-courseware-promo.mp4). It introduces the courseware through real homepage course cards, the gynecologic anesthesia observer checklist, and the clinician-led, AI-assisted production workflow.
+
 This repository collects bilingual HTML teaching modules for introductory anesthesia observation.
 
 The project started from a practical teaching need: I was preparing to mentor a first-year Cornell University student who is interested in anesthesiology but does not yet have an accessible, visual, beginner-friendly set of learning materials. Many anesthesia resources are either written for clinicians who already know the operating room, or they are too text-heavy for a first exposure. These modules try to sit in the middle: clinically grounded, visual, concise, and usable before, during, or after an operating-room observation day.
